@@ -1,25 +1,57 @@
 'use strict';
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
 
     await queryInterface.bulkInsert('Products', [{
-      name: 'Coca Cola 2l',
-      price: 10.00,
-      urlImage: 'https://www.distribuidoracaue.com.br/media/catalog/product/cache/1/thumbnail/600x800/9df78eab33525d08d6e5fb8d27136e95/c/o/coca_2l.png'
+      name: 'Skol Lata 250ml',
+      price: 2.20,
+      urlImage: 'http://localhost:3001/images/skol_lata_350ml.jpg'
     }, {
-      name: 'Absolut Vodka',
-      price: 60.00,
-      urlImage: 'https://superadega.vteximg.com.br/arquivos/ids/170982-1000-1000/Vodka-Absolut-Natural-1L.jpg?v=637775923203930000',
+      name: 'Heineken 600ml',
+      price: 7.50,
+      urlImage: 'http://localhost:3001/images/heineken_600ml.jpg'
     }, {
-      name: 'Colorado',
-      price: 9.99,
-      urlImage: 'https://courier-images-prod.imgix.net/produc_variant/00010136_823bc8b9-ada4-4b74-a12e-494ad621766c.jpg?auto=compress,format&fit=max&w=undefined&h=undefined&dpr=2'
+      name: 'Antarctica Pilsen 300ml',
+      price: 2.49,
+      urlImage: 'http://localhost:3001/images/antarctica_pilsen_300ml.jpg'
+    }, {
+      name: 'Brahma 600ml',
+      price: 7.50,
+      urlImage: 'http://localhost:3001/images/brahma_600ml.jpg'
+    }, {
+      name: 'Skol 269ml',
+      price: 2.19,
+      urlImage: 'http://localhost:3001/images/skol_269ml.jpg'
+    }, {
+      name: 'Skol Beats Senses 313ml',
+      price: 4.49,
+      urlImage: 'http://localhost:3001/images/skol_beats_senses_313ml.jpg'
+    }, {
+      name: 'Becks 330ml',
+      price: 4.99,
+      urlImage: 'http://localhost:3001/images/becks_330ml.jpg'
+    }, {
+      name: 'Brahma Duplo Malte 350ml',
+      price: 2.79,
+      urlImage: 'http://localhost:3001/images/brahma_duplo_malte_350ml.jpg'
+    }, {
+      name: 'Becks 600ml',
+      price: 8.89,
+      urlImage: 'http://localhost:3001/images/becks_600ml.jpg'
+    }, {
+      name: 'Skol Beats Senses 269ml',
+      price: 3.57,
+      urlImage: 'http://localhost:3001/images/skol_beats_senses_269ml.jpg'
+    }, {
+      name: 'Stella Artois 275ml',
+      price: 3.49,
+      urlImage: 'http://localhost:3001/images/stella_artois_275ml.jpg'
     }], {});
 
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete('Products', null, {});
   }
 };
