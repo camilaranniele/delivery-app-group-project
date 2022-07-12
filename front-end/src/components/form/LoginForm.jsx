@@ -62,7 +62,7 @@ function LoginForm() {
         onChange={ ({ target }) => setUserPassword(target.value) }
       />
       <button
-        data-testid="login-submit-btn"
+        data-testid="common_login__button-login"
         type="submit"
         disabled={ disableBtn }
         onClick={ handleSubmit }
