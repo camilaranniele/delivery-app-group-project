@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Sales = sequelize.define('sales', {
+  const sales = sequelize.define('sales', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -37,14 +37,14 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
 
-  Sales.associate = (models) => {
-    Sales.belongsTo(models.Users, {
+  sales.associate = (models) => {
+    sales.belongsTo(models.users, {
       foreignKey: 'userId', as: 'user',
     });
-    Sales.belongsTo(models.Users, {
+    sales.belongsTo(models.users, {
       foreignKey: 'sellerId', as: 'seller',
     });
   };
 
-  return Sales;
+  return sales;
 };
