@@ -1,11 +1,15 @@
-const express = require('express');
+const { Router } = require('express');
 
 const UserController = require('../controllers/user.controller');
 const UserMiddleware = require('../middlewares/user.middleware');
 const { userSchema } = require('../middlewares/schemas/user.schema');
+const userLoginValidation = require('../middlewares/userLogin.middleware');
 
-const routes = express.Router();
+const userRouter = Router();
 
-routes.post('/register', (req, res, next) => UserMiddleware.userValidation(req, res, next, userSchema), UserController.createUser);
+userRouter.post('/register', 
+(req, res, next) => UserMiddleware.userValidation(req, res, next, userSchema),
+ UserController.createUser);
+userRouter.post('/login', userLoginValidation, UserController.login);
 
-module.exports = routes;
+module.exports = userRouter;
