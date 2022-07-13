@@ -24,7 +24,6 @@ function LoginForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setHideElement(false);
     const request = await requestLogin(
       '/users/login',
       {
@@ -32,9 +31,10 @@ function LoginForm() {
         password: userPassword,
       },
     );
-    // if (!request.role) {
-    //   setHideElement(false);
-    // }
+    if (!request) {
+      setHideElement(false);
+      return;
+    }
     localStorage.setItem('user', JSON.stringify(request));
     if (request.role === 'administrator') {
       history.push('/admin/manage');
