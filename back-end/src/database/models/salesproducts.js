@@ -3,19 +3,22 @@ module.exports = (sequelize, DataTypes) => {
     saleId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
+      field: 'sale_id',
     },
     productId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
+      field: 'product_id',
     },
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false
     }
   }, {
-    timestamps: false
+    timestamps: false,
+    underscored: true
   });
 
   salesProducts.associate = (models) => {
