@@ -11,9 +11,9 @@ export const requestLogin = async (url, body) => {
   }
 };
 
-export const requestRegistro = async (url, body) => {
-  const { data } = await api.post(url, body);
-  return data;
+export const requestRegister = async (url, body) => {
+  const response = await api.post(url, body);
+  return response;
 };
 
 export const requestProdutos = async (url) => {
