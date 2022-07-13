@@ -21,7 +21,7 @@ function ProductCard() {
                 data-testid={ `customer_products__element-card-price-${id}` }
                 className="cards-products-price"
               >
-                { price }
+                { price.toString().replace('.', ',') }
               </span>
             </p>
             <img
@@ -45,14 +45,14 @@ function ProductCard() {
         ))
       }
       <footer>
-        <p>
+        <a href="#customerCheckout">
           Ver Carrinho: R$:
           <span
             data-testid="customer_products__checkout-bottom-value"
           >
             { totalPrice.toFixed(MAGIC_BUMBER_TO_FIXED) }
           </span>
-        </p>
+        </a>
       </footer>
     </div>
   );
