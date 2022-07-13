@@ -10,7 +10,7 @@ function ProductCard() {
   return (
     <div className="box-container">
       {
-        products.map(({ id, name, price/* , url_image: urlImage */ }) => (
+        products.map(({ id, name, price, urlImage }) => (
           <div
             key={ id }
             className="cards-main"
@@ -25,7 +25,7 @@ function ProductCard() {
               </span>
             </p>
             <img
-              src="https://cf.shopee.com.br/file/8d99a10270672f2d6522762f2dd0ecf3"
+              src={ urlImage }
               width="200"
               height="200"
               alt={ `produto ${name}` }
