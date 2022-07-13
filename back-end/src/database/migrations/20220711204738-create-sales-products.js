@@ -9,7 +9,8 @@ module.exports = {
           key: 'id',
         },
         primaryKey: true,
-        allowNull: false
+        allowNull: false,
+        field: 'sale_id',
       },
       productId: {
         type: Sequelize.INTEGER,
@@ -18,14 +19,16 @@ module.exports = {
           key: 'id',
         },
         primaryKey: true,
-        allowNull: false
+        allowNull: false,
+        field: 'product_id',
       },
       quantity: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
     }, {
-      timestamps: false
+      timestamps: false,
+      underscored: true
     });
   },
   async down(queryInterface, Sequelize) {

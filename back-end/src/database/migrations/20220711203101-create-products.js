@@ -17,10 +17,12 @@ module.exports = {
         allowNull: false,
       },
       urlImage: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        field: 'url_image'
       },
     }, {
-      timestamps: false
+      timestamps: false,
+      underscored: true
     });
   },
   async down(queryInterface, Sequelize) {
