@@ -50,7 +50,7 @@ function ProductCard() {
           <span
             data-testid="customer_products__checkout-bottom-value"
           >
-            { totalPrice.toFixed(MAGIC_BUMBER_TO_FIXED) }
+            { totalPrice.toFixed(MAGIC_BUMBER_TO_FIXED).toString().replace('.', ',') }
           </span>
         </a>
       </footer>
