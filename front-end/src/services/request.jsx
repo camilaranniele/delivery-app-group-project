@@ -3,8 +3,12 @@ import axios from 'axios';
 const api = axios.create({ baseURL: 'http://localhost:3001' });
 
 export const requestLogin = async (url, body) => {
-  const { data } = await api.post(url, body);
-  return data;
+  try {
+    const { data } = await api.post(url, body);
+    return data;
+  } catch {
+    return null;
+  }
 };
 
 export const requestRegistro = async (url, body) => {
