@@ -6,6 +6,7 @@ function LoginForm() {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [disableBtn, setDisableBtn] = useState(true);
+  const [hideElement, setHideElement] = useState(true);
   const history = useHistory();
 
   useEffect(() => {
@@ -23,6 +24,7 @@ function LoginForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setHideElement(false);
     const request = await requestLogin(
       '/users/login',
       {
@@ -30,6 +32,9 @@ function LoginForm() {
         password: userPassword,
       },
     );
+    // if (!request.role) {
+    //   setHideElement(false);
+    // }
     localStorage.setItem('user', JSON.stringify(request));
     if (request.role === 'administrator') {
       history.push('/admin/manage');
@@ -41,6 +46,10 @@ function LoginForm() {
       history.push('customer/products');
     }
     return request;
+  };
+
+  const handleRegister = () => {
+    history.push('/register');
   };
 
   return (
@@ -69,6 +78,18 @@ function LoginForm() {
       >
         Login
       </button>
+      <button
+        data-testid="common_login__button-register"
+        type="button"
+        onClick={ handleRegister }
+      >
+        Registrar
+      </button>
+      <div
+        data-testid="common_login__element-invalid-email"
+      >
+        { hideElement ? null : <p>Login inválido</p> }
+      </div>
     </form>
   );
 }
