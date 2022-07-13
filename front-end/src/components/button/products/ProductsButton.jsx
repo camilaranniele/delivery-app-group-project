@@ -25,6 +25,24 @@ function ProductsButton({ id, price }) {
     if (quantity > 0 && subTotalPrice < 0) { setTotalPrice(0); }
   };
 
+  const handleChangeQuantity = (e) => {
+    const { value } = e.target;
+
+    if (value < 0) {
+      setQuantity(0);
+      return;
+    }
+
+    const nextPrice = (totalPrice - (price * quantity)) + price * value;
+
+    if (value > quantity) {
+      setTotalPrice(nextPrice);
+    } else {
+      setTotalPrice(nextPrice);
+    }
+    setQuantity(value);
+  };
+
   return (
     <div className="button-box">
       <button
@@ -35,16 +53,17 @@ function ProductsButton({ id, price }) {
       >
         -
       </button>
-      <span
+      <input
+        type="number"
+        min="0"
         data-testid={ `customer_products__input-card-quantity-${id}` }
-      >
-        { quantity }
-      </span>
+        onChange={ handleChangeQuantity }
+        value={ quantity }
+      />
       <button
         data-testid={ `customer_products__button-card-add-item-${id}` }
         type="button"
         onClick={ handleAddQuantity }
-
       >
         +
       </button>
