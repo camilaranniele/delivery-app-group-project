@@ -12,8 +12,12 @@ export const requestLogin = async (url, body) => {
 };
 
 export const requestRegister = async (url, body) => {
-  const response = await api.post(url, body);
-  return response;
+  try {
+    const response = await api.post(url, body);
+    return response;
+  } catch (error) {
+    return error.response;
+  }
 };
 
 export const requestProdutos = async (url) => {
