@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import MyContext from '../context';
-// import { requestProdutos } from '../services/request';
-import productsMock from './productsMock.json';
+import { requestProdutos } from '../services/request';
 
 function Provider({ children }) {
   const [products, setProducts] = useState([]);
@@ -10,7 +9,9 @@ function Provider({ children }) {
 
   useEffect(() => {
     async function fetchProducts() {
-      await setProducts(productsMock);
+      const requestAllProducts = await requestProdutos('/products');
+      console.log(requestAllProducts);
+      setProducts(requestAllProducts);
     }
     fetchProducts();
   }, []);
