@@ -36,7 +36,7 @@ function FormRegister() {
     event.preventDefault();
     setError(false);
 
-    const response = await requestRegister('/register', {
+    const response = await requestRegister('/users/register', {
       name, email, password,
     });
 
