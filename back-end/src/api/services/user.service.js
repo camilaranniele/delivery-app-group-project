@@ -12,7 +12,7 @@ const createUser = async ({ name, email, password }) => {
 
   const newUser = await users.create({ name, email, password: hashedPassword, role: 'customer' });
 
-  const token = sign({ email, role: newUser.role });
+  const token = sign({ email, role: newUser.role, id: newUser.id });
 
   return {
     name: newUser.name,
@@ -33,7 +33,7 @@ const login = async (email, password) => {
     return { code: 400, error: '"email" or "password" is incorrect' };
   }
 
-  const token = sign({ email: user.email, role: user.role });
+  const token = sign({ email: user.email, role: user.role, id: user.id });
 
   return {
     name: user.name,
