@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './navBar.css';
 
 function NavBar() {
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    const userValues = localStorage.getItem('user');
+    const parsedUserValues = JSON.parse(userValues);
+    setUserName(parsedUserValues.name);
+  }, []);
+
+  const handleClickLogout = () => {
+    localStorage.clear();
+  };
   return (
     <div className="topnav">
       <a
@@ -18,16 +29,14 @@ function NavBar() {
       >
         meus pedidos
       </a>
-      <a
-      // falta a rota
-        href="#user"
+      <span
         data-testid="customer_products__element-navbar-user-full-name"
       >
-        user
-      </a>
+        { userName }
+      </span>
       <a
-      // falta a rota
-        href="#sair"
+        href="/"
+        onClick={ handleClickLogout }
         data-testid="customer_products__element-navbar-link-logout"
       >
         sair
