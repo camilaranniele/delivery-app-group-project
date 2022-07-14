@@ -1,0 +1,19 @@
+.box-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cards-main {
+  border: 1px solid black;
+  border-radius: 4px;
+  margin: 10px;
+}
+
+.cards-products-name {
+  text-align: center;
+}
+
+.cards-products-price {
+  font-size: 18px;
+  text-align: initial;
+}
