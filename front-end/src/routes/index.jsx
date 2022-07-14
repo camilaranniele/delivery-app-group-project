@@ -5,6 +5,8 @@ import Register from '../pages/register';
 import Login from '../pages/Login';
 import LoginRedirect from '../pages/LoginRedirect';
 import AdminPage from '../pages/AdminPage';
+import OrderSeller from '../pages/OrderSeller';
+import OrderCustomer from '../pages/OrderCustomer';
 
 class Routes extends React.Component {
   render() {
@@ -16,6 +18,8 @@ class Routes extends React.Component {
         {/* <Route exact path="/customer/products" component={ Products } /> */}
         <Route exact path="/admin/manage" component={ AdminPage } />
         <Route exact path="/customer/products" component={ Products } />
+        <Route exact path="/customer/orders" component={ OrderCustomer } />
+        <Route exact path="/seller/orders" component={ OrderSeller } />
       </Switch>
     );
   }

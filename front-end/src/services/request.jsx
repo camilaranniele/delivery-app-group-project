@@ -37,3 +37,17 @@ export const requestProdutos = async (url) => {
   const { data } = await api.get(url);
   return data;
 };
+
+export const requestOrder = async (url, token) => {
+  try {
+    const { data } = await api.get(
+      url,
+      null,
+      {
+        headers: { Authorization: token },
+      })
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
