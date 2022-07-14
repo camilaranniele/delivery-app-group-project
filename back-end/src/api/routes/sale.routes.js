@@ -7,5 +7,6 @@ const SalesRoutes = Router();
 SalesRoutes.use(tokenMiddleware.validateToken);
 
 SalesRoutes.get('/', SalesController.readSales);
+SalesRoutes.get('/details/:id', SalesController.readSalesDetails);
 
 module.exports = SalesRoutes;
