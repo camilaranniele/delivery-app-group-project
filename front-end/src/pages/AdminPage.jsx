@@ -1,10 +1,11 @@
 import React from 'react';
 import AdminRegister from '../components/form/Admin.register';
+import AdminNavBar from '../components/navBar/AdminNavBar';
 
 function AdminPage() {
   return (
     <div>
-      <h1>Admin Page</h1>
+      <AdminNavBar />
       <AdminRegister />
     </div>
   );
