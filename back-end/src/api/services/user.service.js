@@ -1,4 +1,4 @@
-const { users } = require('../../database/models');
+const { users, sales } = require('../../database/models');
 
 const { hash, verify } = require('../utils/md5');
 
@@ -67,8 +67,25 @@ const createUserByAdmin = async ({ name, email, password, role }, token) => {
   };
 };
 
+const readSales = async (id, seller = false) => {
+  let salesFounded = [];
+
+  if (seller) {
+    salesFounded = await sales.findAll({ where: { sellerId: id } });
+  } else {
+    salesFounded = await sales.findAll({ where: { userId: id } });
+  }
+  
+  if (!salesFounded) {
+    return { code: 404, error: '"user" not found' };
+  }
+
+  return salesFounded.map((sale) => sale.dataValues);
+};
+
 module.exports = {
   createUser,
   login,
   createUserByAdmin,
+  readSales,
 };
