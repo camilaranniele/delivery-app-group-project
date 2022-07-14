@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-// import { useHistory } from 'react-router-dom';
-import { requestRegister } from '../../services/request';
+import { requestAdminRegister } from '../../services/request';
 
 const CONFLICT_ERROR = 409;
-// const testId = 'common_register__element-invalid_register';
 
 function AdminRegister() {
   const [name, setName] = useState('');
@@ -12,7 +10,7 @@ function AdminRegister() {
   const [role, setRole] = useState('seller');
   const [isDisable, setIsDesable] = useState(true);
   const [error, setError] = useState(false);
-  // const history = useHistory();
+  const [userCreated, setUserCreated] = useState(false);
 
   useEffect(() => {
     const validateRegister = () => {
@@ -33,23 +31,27 @@ function AdminRegister() {
     validateRegister();
   }, [name, email, password, role]);
 
-  // trocar essa função
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError(false);
 
-    const response = await requestRegister('/admin/register', {
+    const localstorage = localStorage.getItem('user');
+    const { token } = JSON.parse(localstorage);
+
+    const response = await requestAdminRegister('/admin/register', {
       name, email, password, role,
-    });
+    }, token);
 
     if (response.status === CONFLICT_ERROR) {
       setError(true);
-      // return;
     }
 
-    // localStorage.setItem('user', JSON.stringify(response));
+    setUserCreated(true);
 
-    // return history.push('customer/products');
+    setName('');
+    setEmail('');
+    setPassword('');
+    setRole('seller');
   };
 
   return (
@@ -61,7 +63,7 @@ function AdminRegister() {
             type="text"
             name="name"
             value={ name }
-            // data-testid="common_register__input-name"
+            data-testid="admin_manage__input-name"
             onChange={ ({ target }) => setName(target.value) }
           />
         </label>
@@ -72,7 +74,7 @@ function AdminRegister() {
             type="email"
             name="email"
             value={ email }
-            // data-testid="common_register__input-email"
+            data-testid="admin_manage__input-email"
             onChange={ ({ target }) => setEmail(target.value) }
           />
         </label>
@@ -83,7 +85,7 @@ function AdminRegister() {
             type="password"
             name="password"
             value={ password }
-            // data-testid="common_register__input-password"
+            data-testid="admin_manage__input-password"
             onChange={ ({ target }) => setPassword(target.value) }
           />
         </label>
@@ -91,6 +93,7 @@ function AdminRegister() {
         <label htmlFor="role">
           Role
           <select
+            data-testid="admin_manage__select-role"
             onChange={ ({ target }) => setRole(target.value) }
           >
             <option value="seller">Vendedor</option>
@@ -100,7 +103,7 @@ function AdminRegister() {
 
         <button
           type="submit"
-          // data-testid="common_register__button-register"
+          data-testid="admin_manage__button-register"
           disabled={ isDisable }
           onClick={ handleSubmit }
         >
@@ -109,8 +112,8 @@ function AdminRegister() {
 
       </form>
 
-      {error && <span data-testid={ testId }>User already exists</span>}
-
+      {error && <span>User already exists</span>}
+      {userCreated && <span>User created successfully</span> }
     </div>
   );
 }
