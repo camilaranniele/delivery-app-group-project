@@ -44,6 +44,7 @@ function AdminRegister() {
 
     if (response.status === CONFLICT_ERROR) {
       setError(true);
+      return;
     }
 
     setUserCreated(true);
