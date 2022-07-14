@@ -4,6 +4,7 @@ import Products from '../pages/Products';
 import Register from '../pages/register';
 import Login from '../pages/Login';
 import LoginRedirect from '../pages/LoginRedirect';
+import ProductsCheckout from '../pages/ProductsCheckout';
 
 class Routes extends React.Component {
   render() {
@@ -13,6 +14,7 @@ class Routes extends React.Component {
         <Route exact path="/login" component={ Login } />
         <Route exact path="/register" component={ Register } />
         <Route exact path="/customer/products" component={ Products } />
+        <Route exact path="/customer/checkout" component={ ProductsCheckout } />
       </Switch>
     );
   }
