@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { requestAdminRegister } from '../../services/request';
 
 const CONFLICT_ERROR = 409;
+const DATA_TESTID_ERROR = 'admin_manage__element-invalid-register';
 
 function AdminRegister() {
   const [name, setName] = useState('');
@@ -113,7 +114,7 @@ function AdminRegister() {
 
       </form>
 
-      {error && <span>User already exists</span>}
+      {error && <span data-testid={ DATA_TESTID_ERROR }>User already exists</span>}
       {userCreated && <span>User created successfully</span> }
     </div>
   );
