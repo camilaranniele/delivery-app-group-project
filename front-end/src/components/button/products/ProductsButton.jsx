@@ -1,14 +1,43 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import context from '../../../context';
 import './productsButton.css';
 
-function ProductsButton({ id, price }) {
-  const { setTotalPrice, totalPrice } = useContext(context);
+function ProductsButton({ id, price, name }) {
+  const MAGIC_NUMBER = -1;
+
+  const {
+    setTotalPrice,
+    totalPrice,
+    setproductsForStorage,
+    productsForStorage,
+  } = useContext(context);
+
   const [quantity, setQuantity] = useState(0);
 
+  useEffect(() => {
+    if (quantity === 0) {
+      const newList = productsForStorage.filter((product) => product.name !== name);
+      setproductsForStorage(newList);
+      return;
+    }
+
+    const objId = productsForStorage
+      .findIndex((products) => products.name === name);
+
+    const objForStorage = { id, name, price, quantity };
+    localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
+
+    if (objId === MAGIC_NUMBER) {
+      setproductsForStorage([...productsForStorage, objForStorage]);
+    } else {
+      productsForStorage[objId].quantity = quantity;
+      setproductsForStorage(productsForStorage);
+    }
+  }, [quantity]);
+
   const handleAddQuantity = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+    setQuantity(((prevQuantity) => prevQuantity + 1));
     setTotalPrice((prevPrice) => prevPrice + Number(price));
   };
 
@@ -16,7 +45,9 @@ function ProductsButton({ id, price }) {
   const handleSubQuantity = () => {
     const subTotalPrice = totalPrice - price;
 
-    if (quantity > 0) { setQuantity((prevQuantity) => prevQuantity - 1); }
+    if (quantity > 0) {
+      setQuantity(((prevQuantity) => prevQuantity - 1));
+    }
 
     if (quantity > 0 && subTotalPrice > MAGIC_NUMBER_FOR_SUB) {
       setTotalPrice((prevPrice) => prevPrice - Number(price));
@@ -74,6 +105,7 @@ function ProductsButton({ id, price }) {
 ProductsButton.propTypes = {
   id: PropTypes.number.isRequired,
   price: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default ProductsButton;
