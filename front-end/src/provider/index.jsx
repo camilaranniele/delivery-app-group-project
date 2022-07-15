@@ -6,11 +6,11 @@ import { requestProdutos } from '../services/request';
 function Provider({ children }) {
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [productsForStorage, setproductsForStorage] = useState([]);
 
   useEffect(() => {
     async function fetchProducts() {
       const requestAllProducts = await requestProdutos('/products');
-      console.log(requestAllProducts);
       setProducts(requestAllProducts);
     }
     fetchProducts();
@@ -20,6 +20,8 @@ function Provider({ children }) {
     products,
     totalPrice,
     setTotalPrice,
+    productsForStorage,
+    setproductsForStorage,
   };
 
   return (
