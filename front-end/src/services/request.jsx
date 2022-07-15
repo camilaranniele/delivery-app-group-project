@@ -42,12 +42,13 @@ export const requestOrder = async (url, token) => {
   try {
     const { data } = await api.get(
       url,
-      null,
       {
         headers: { Authorization: token },
-      })
+      },
+    );
     return data;
   } catch (error) {
+    console.log(error);
     return error;
   }
 };
