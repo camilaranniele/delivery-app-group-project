@@ -1,11 +1,24 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import context from '../../../context';
 import ProductsButton from '../../button/products/ProductsButton';
 import './card.css';
 
 function ProductCard() {
-  const { products, totalPrice } = useContext(context);
+  const {
+    products,
+    totalPrice,
+    productsForStorage,
+  } = useContext(context);
+
   const MAGIC_BUMBER_TO_FIXED = 2;
+
+  const history = useHistory();
+
+  const handleButtonCheckout = () => {
+    localStorage.setItem('carrinho', JSON.stringify(productsForStorage));
+    history.push('/customer/checkout');
+  };
 
   return (
     <div className="box-container">
@@ -40,19 +53,21 @@ function ProductCard() {
             <ProductsButton
               id={ id }
               price={ price }
+              name={ name }
             />
           </div>
         ))
       }
       <footer>
-        <a href="#customerCheckout">
-          Ver Carrinho: R$:
-          <span
-            data-testid="customer_products__checkout-bottom-value"
-          >
-            { totalPrice.toFixed(MAGIC_BUMBER_TO_FIXED).toString().replace('.', ',') }
-          </span>
-        </a>
+        <button
+          type="button"
+          onClick={ handleButtonCheckout }
+          data-testid="customer_products__checkout-bottom-value"
+          disabled={ totalPrice === 0 }
+        >
+          {`Ver Carrinho R$: ${totalPrice.toFixed(MAGIC_BUMBER_TO_FIXED)
+            .toString().replace('.', ',')}` }
+        </button>
       </footer>
     </div>
   );
