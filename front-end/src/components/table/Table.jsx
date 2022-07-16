@@ -3,7 +3,17 @@ import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ButtonCheckout from '../button/checkout/ButtonCheckout';
 
-function Table({ productsInStore, removeItenInListProducts }) {
+function Table({
+  productsInStore,
+  removeItenInListProducts,
+  idIndex,
+  idName,
+  idQuantity,
+  idPrice,
+  idSubTotal,
+  idTotalPrice,
+  fullPrice,
+}) {
   const [isButton, setIsButton] = useState(false);
   const localtion = useLocation();
 
@@ -30,16 +40,47 @@ function Table({ productsInStore, removeItenInListProducts }) {
               const totalPrice = Number(price) * quantity;
               return (
                 <tr key={ id }>
-                  <td>{ index + 1 }</td>
-                  <td>{ name }</td>
-                  <td>{ quantity }</td>
-                  <td>{ price }</td>
-                  <td>{ totalPrice.toFixed(2).toString().replace('.', ',') }</td>
+                  <td
+                    data-testid={
+                      `${idIndex}${index}`
+                    }
+                  >
+                    { index + 1 }
+                  </td>
+                  <td
+                    data-testid={
+                      `${idName}${index}`
+                    }
+                  >
+                    { name }
+                  </td>
+                  <td
+                    data-testid={
+                      `${idQuantity}${index}`
+                    }
+                  >
+                    { quantity }
+                  </td>
+                  <td
+                    data-testid={
+                      `${idPrice}${index}`
+                    }
+                  >
+                    { price }
+                  </td>
+                  <td
+                    data-testid={
+                      `${idSubTotal}${index}`
+                    }
+                  >
+                    { totalPrice.toFixed(2).toString().replace('.', ',') }
+                  </td>
                   {
                     isButton
                     && <ButtonCheckout
                       id={ id }
                       removeItenInListProducts={ removeItenInListProducts }
+                      index={ index }
                     />
                   }
 
@@ -49,6 +90,11 @@ function Table({ productsInStore, removeItenInListProducts }) {
           }
         </tbody>
       </table>
+      <p data-testid={ idTotalPrice }>
+        {
+          fullPrice.toFixed(2)
+        }
+      </p>
     </div>
   );
 }
@@ -61,6 +107,13 @@ Table.propTypes = {
     quantity: PropTypes.number.isRequired,
   })).isRequired,
   removeItenInListProducts: PropTypes.func.isRequired,
+  idIndex: PropTypes.string.isRequired,
+  idName: PropTypes.string.isRequired,
+  idQuantity: PropTypes.string.isRequired,
+  idPrice: PropTypes.string.isRequired,
+  idSubTotal: PropTypes.string.isRequired,
+  idTotalPrice: PropTypes.string.isRequired,
+  fullPrice: PropTypes.number.isRequired,
 };
 
 export default Table;
