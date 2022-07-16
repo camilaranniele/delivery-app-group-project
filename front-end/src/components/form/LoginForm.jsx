@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Heading,
+  Box,
+  Image,
+  Flex,
+  Stack,
+} from '@chakra-ui/react';
 import { requestLogin } from '../../services/request';
+import Logo from '../../images/logo.png';
 
 function LoginForm() {
   const [userEmail, setUserEmail] = useState('');
@@ -53,44 +65,87 @@ function LoginForm() {
   };
 
   return (
-    <form>
-      <input
-        name="email"
-        type="email"
-        placeholder="Email"
-        data-testid="common_login__input-email"
-        value={ userEmail }
-        onChange={ ({ target }) => setUserEmail(target.value) }
-      />
-      <input
-        name="password"
-        type="password"
-        placeholder="Senha"
-        data-testid="common_login__input-password"
-        value={ userPassword }
-        onChange={ ({ target }) => setUserPassword(target.value) }
-      />
-      <button
-        data-testid="common_login__button-login"
-        type="submit"
-        disabled={ disableBtn }
-        onClick={ handleSubmit }
-      >
-        Login
-      </button>
-      <button
-        data-testid="common_login__button-register"
-        type="button"
-        onClick={ handleRegister }
-      >
-        Registrar
-      </button>
-      <div
-        data-testid="common_login__element-invalid-email"
-      >
-        { hideElement ? null : <p>Login inválido</p> }
-      </div>
-    </form>
+    <Flex
+      minH="100vh"
+      align="center"
+      justify="center"
+    >
+
+      <Box>
+
+        <Stack align="center">
+          <Image src={ Logo } alt="logo" boxSize="100px" />
+
+          <Heading color="gray" p="4">iDrink</Heading>
+        </Stack>
+
+        <Box borderWidth="1px" p="6" w={ 425 } bg="gray.100" boxShadow="md">
+          <FormControl display="flex" flexDir="column">
+
+            <FormLabel htmlFor="email" m="2" color="green.600">Login</FormLabel>
+            <Input
+              height="70"
+              bg="white"
+              name="email"
+              type="email"
+              placeholder="Email"
+              data-testid="common_login__input-email"
+              value={ userEmail }
+              onChange={ ({ target }) => setUserEmail(target.value) }
+            />
+
+            <FormLabel htmlFor="password" m="2" color="green.600">Senha</FormLabel>
+            <Input
+              height="70"
+              bg="white"
+              name="password"
+              type="password"
+              placeholder="*********"
+              data-testid="common_login__input-password"
+              value={ userPassword }
+              onChange={ ({ target }) => setUserPassword(target.value) }
+            />
+
+            <Button
+              height="59"
+              mt="4"
+              colorScheme="green"
+              opacity="0.5"
+              size="md"
+              data-testid="common_login__button-login"
+              type="submit"
+              disabled={ disableBtn }
+              onClick={ handleSubmit }
+            >
+              Login
+            </Button>
+            <Button
+              height="59"
+              mt="4"
+              colorScheme="green"
+              color="green.500"
+              size="md"
+              variant="outline"
+              data-testid="common_login__button-register"
+              type="button"
+              onClick={ handleRegister }
+            >
+              Ainda não tenho conta
+            </Button>
+
+            <Box
+              data-testid="common_login__element-invalid-email"
+              color="red"
+              p="4"
+              align="center"
+            >
+              { hideElement ? null : <p>Login inválido</p> }
+            </Box>
+
+          </FormControl>
+        </Box>
+      </Box>
+    </Flex>
   );
 }
 

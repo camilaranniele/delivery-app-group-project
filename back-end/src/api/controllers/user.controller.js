@@ -24,7 +24,21 @@ const login = async (req, res) => {
   }
 };
 
+const createUserByAdmin = async (req, res) => {
+  try {
+    const token = req.headers.authorization;
+    const newUser = await UserService.createUserByAdmin(req.body, token);
+    if (newUser.error) {
+      return res.status(newUser.code).json({ error: newUser.error });
+    }
+    return res.status(201).json(newUser);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createUser,
   login,
+  createUserByAdmin,
 };

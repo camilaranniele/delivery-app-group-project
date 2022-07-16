@@ -52,7 +52,6 @@ module.exports = {
       },
     }, {
       timestamps: false,
-      underscored: true
     });
   },
   async down(queryInterface, Sequelize) {
