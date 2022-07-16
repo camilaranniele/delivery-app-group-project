@@ -10,7 +10,6 @@ function Provider({ children }) {
   useEffect(() => {
     async function fetchProducts() {
       const requestAllProducts = await requestProdutos('/products');
-      console.log(requestAllProducts);
       setProducts(requestAllProducts);
     }
     fetchProducts();
