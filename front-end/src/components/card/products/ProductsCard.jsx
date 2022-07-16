@@ -62,11 +62,13 @@ function ProductCard() {
         <button
           type="button"
           onClick={ handleButtonCheckout }
-          data-testid="customer_products__checkout-bottom-value"
+          data-testid="customer_products__button-cart"
           disabled={ totalPrice === 0 }
         >
-          {`Ver Carrinho R$: ${totalPrice.toFixed(MAGIC_BUMBER_TO_FIXED)
-            .toString().replace('.', ',')}` }
+          Ver Carrinho R$:
+          <span data-testid="customer_products__checkout-bottom-value">
+            {totalPrice.toFixed(MAGIC_BUMBER_TO_FIXED).toString().replace('.', ',')}
+          </span>
         </button>
       </footer>
     </div>
