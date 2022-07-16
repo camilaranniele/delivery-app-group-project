@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Flex, Link } from '@chakra-ui/react';
 import { requestOrder } from '../../../services/request';
+import RequestOrderBox from '../../box/orders/RequestOrderBox';
+import StatusOrderbox from '../../box/orders/StatusOrderBox';
 
-const testOrderId = 'seller_orders__element-order-id-';
-const testOrderStatus = 'seller_orders__element-delivery-status-';
-const testOrderDate = 'seller_orders__element-order-date-';
-const testOrderTotalPrice = 'seller_orders__element-card-price-';
-const testOrderAdress = 'seller_orders__element-card-address-';
+const testOrderId = '_orders__element-order-id-';
+const testOrderStatus = '_orders__element-delivery-status-';
+const testOrderDate = '_orders__element-order-date-';
+const testOrderTotalPrice = '_orders__element-card-price-';
+const testOrderAdress = '_orders__element-card-address-';
 
 function OrderCard() {
-  const [disableFooter, setDisableFooter] = useState(true);
   const [orders, setOrders] = useState([]);
+  const [footer, setFooter] = useState(true);
   const { token, role } = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
@@ -18,10 +20,10 @@ function OrderCard() {
       const request = await requestOrder(
         '/sales', token,
       );
-      if (role === 'seller') {
-        setDisableFooter(false);
-      }
       setOrders(request);
+      if (role === 'seller') {
+        setFooter(false);
+      }
     };
     requestApi();
   }, [role, token]);
@@ -37,48 +39,38 @@ function OrderCard() {
         status: statusDeVenda,
       },
     ) => (
-      <Link key={ numeroDoPedido } to={ `/${role}/orders/${numeroDoPedido}` }>
-        <div className="card">
-          <div className="numeroDoPedido">
-            <p
-              data-testid={ `${role}${testOrderId}${numeroDoPedido}` }
-            >
-              { numeroDoPedido }
-            </p>
-          </div>
-          <div className="infoPedidos">
-            <div>
-              <h1
-                data-testid={ `${role}${testOrderStatus}${numeroDoPedido}` }
-              >
-                { statusDeVenda }
-              </h1>
-              <p
-                data-testid={ `${role}${testOrderDate}${numeroDoPedido}` }
-              >
-                { dataDaVenda }
-              </p>
-              <p
-                data-testid={ `${role}${testOrderTotalPrice}${numeroDoPedido}` }
-              >
-                { precoTotal }
-              </p>
-            </div>
-          </div>
-          <div className="footer">
-            {
-              disableFooter
-                ? null
-                : (
-                  <footer
-                    data-testid={ `${role}${testOrderAdress}${numeroDoPedido}` }
-                  >
-                    { `${enderecoDeEntrega},${numeroDoEndereco}` }
-                  </footer>
-                )
-            }
-          </div>
-        </div>
+      <Link
+        to={ `/${role}/orders/${numeroDoPedido}` }
+        key={ numeroDoPedido }
+      >
+        <Flex bg="grey.100" maxWidth="500px">
+          <RequestOrderBox
+            role={ role }
+            conteudo={ { numeroDoPedido } }
+            testId={ { testOrderId } }
+          />
+          <Flex className="infoPedidos">
+            <StatusOrderbox
+              role={ role }
+              conteudo={ {
+                numeroDoPedido,
+                precoTotal,
+                enderecoDeEntrega,
+                numeroDoEndereco,
+                dataDaVenda,
+                statusDeVenda,
+              } }
+              testId={ {
+                testOrderId,
+                testOrderStatus,
+                testOrderDate,
+                testOrderTotalPrice,
+                testOrderAdress,
+              } }
+              haveFooter={ footer }
+            />
+          </Flex>
+        </Flex>
       </Link>
     )));
 }
