@@ -37,3 +37,8 @@ export const requestProdutos = async (url) => {
   const { data } = await api.get(url);
   return data;
 };
+
+export const requestSellers = async (url) => {
+  const { data } = await api.get(url);
+  return data;
+};
