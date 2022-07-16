@@ -66,7 +66,7 @@ function Table({
                       `${idPrice}${index}`
                     }
                   >
-                    { price }
+                    { Number(price).toFixed(2).toString().replace('.', ',') }
                   </td>
                   <td
                     data-testid={
