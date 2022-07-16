@@ -10,13 +10,13 @@ function Provider({ children }) {
   const [sellers, setSellers] = useState([]);
 
   useEffect(() => {
-    async function fetchProducts() {
+    async function fetchInDB() {
       const requestAllProducts = await requestProdutos('/products');
       setProducts(requestAllProducts);
       const requestAllSellers = await requestSellers('/sellers');
       setSellers(requestAllSellers);
     }
-    fetchProducts();
+    fetchInDB();
   }, []);
 
   const contextValue = {
