@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import MyContext from '../context';
-import { requestProdutos } from '../services/request';
+import { requestProdutos, requestSellers } from '../services/request';
 
 function Provider({ children }) {
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [productsForStorage, setproductsForStorage] = useState([]);
+  const [sellers, setSellers] = useState([]);
 
   useEffect(() => {
     async function fetchProducts() {
       const requestAllProducts = await requestProdutos('/products');
       setProducts(requestAllProducts);
+      const requestAllSellers = await requestSellers('/sellers');
+      setSellers(requestAllSellers);
     }
     fetchProducts();
   }, []);
@@ -22,6 +25,7 @@ function Provider({ children }) {
     setTotalPrice,
     productsForStorage,
     setproductsForStorage,
+    sellers,
   };
 
   return (
