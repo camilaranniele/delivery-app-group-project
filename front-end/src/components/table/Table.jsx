@@ -92,7 +92,7 @@ function Table({
       </table>
       <p data-testid={ idTotalPrice }>
         {
-          fullPrice.toFixed(2)
+          fullPrice.toFixed(2).toString().replace('.', ',')
         }
       </p>
     </div>
