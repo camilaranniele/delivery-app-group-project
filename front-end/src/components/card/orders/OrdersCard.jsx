@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link as ReactLink } from 'react-router-dom';
 import { Flex, Link } from '@chakra-ui/react';
 import { requestOrder } from '../../../services/request';
 import RequestOrderBox from '../../box/orders/RequestOrderBox';
@@ -41,6 +42,7 @@ function OrderCard() {
       },
     ) => (
       <Link
+        as={ ReactLink }
         to={ `/${role}/orders/${numeroDoPedido}` }
         key={ numeroDoPedido }
       >
