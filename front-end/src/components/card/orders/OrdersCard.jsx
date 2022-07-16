@@ -3,12 +3,13 @@ import { Flex, Link } from '@chakra-ui/react';
 import { requestOrder } from '../../../services/request';
 import RequestOrderBox from '../../box/orders/RequestOrderBox';
 import StatusOrderbox from '../../box/orders/StatusOrderBox';
-
-const testOrderId = '_orders__element-order-id-';
-const testOrderStatus = '_orders__element-delivery-status-';
-const testOrderDate = '_orders__element-order-date-';
-const testOrderTotalPrice = '_orders__element-card-price-';
-const testOrderAdress = '_orders__element-card-address-';
+import {
+  testOrderId,
+  testOrderStatus,
+  testOrderDate,
+  testOrderTotalPrice,
+  testOrderAdress,
+} from '../../../utils/OrderTestIds';
 
 function OrderCard() {
   const [orders, setOrders] = useState([]);
