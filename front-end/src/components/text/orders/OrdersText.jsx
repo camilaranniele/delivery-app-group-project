@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 
 function OrdersText({ role, testId, conteudo, orderId }) {
   return (
-    <Text data-testid={ `${role}${testId}${orderId}` }>
+    <Text
+      align="center"
+      data-testid={ `${role}${testId}${orderId}` }
+    >
       { conteudo }
     </Text>
   );

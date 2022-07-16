@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
-import { Flex, Link } from '@chakra-ui/react';
+import { Box, Flex, Link } from '@chakra-ui/react';
 import { requestOrder } from '../../../services/request';
 import RequestOrderBox from '../../box/orders/RequestOrderBox';
 import StatusOrderbox from '../../box/orders/StatusOrderBox';
@@ -41,40 +41,49 @@ function OrderCard() {
         status: statusDeVenda,
       },
     ) => (
-      <Link
-        as={ ReactLink }
-        to={ `/${role}/orders/${numeroDoPedido}` }
+      <Box
         key={ numeroDoPedido }
+        maxWidth="20em"
+        margin="2em"
+        border="0.2em solid"
+        borderRadius="10px"
+        borderColor="black.400"
       >
-        <Flex bg="grey.100" maxWidth="500px">
-          <RequestOrderBox
-            role={ role }
-            conteudo={ { numeroDoPedido } }
-            testId={ { testOrderId } }
-          />
-          <Flex className="infoPedidos">
-            <StatusOrderbox
+        <Link
+          as={ ReactLink }
+          to={ `/${role}/orders/${numeroDoPedido}` }
+
+        >
+          <Flex>
+            <RequestOrderBox
               role={ role }
-              conteudo={ {
-                numeroDoPedido,
-                precoTotal,
-                enderecoDeEntrega,
-                numeroDoEndereco,
-                dataDaVenda,
-                statusDeVenda,
-              } }
-              testId={ {
-                testOrderId,
-                testOrderStatus,
-                testOrderDate,
-                testOrderTotalPrice,
-                testOrderAdress,
-              } }
-              haveFooter={ footer }
+              conteudo={ { numeroDoPedido } }
+              testId={ { testOrderId } }
             />
+            <Flex className="infoPedidos">
+              <StatusOrderbox
+                role={ role }
+                conteudo={ {
+                  numeroDoPedido,
+                  precoTotal,
+                  enderecoDeEntrega,
+                  numeroDoEndereco,
+                  dataDaVenda,
+                  statusDeVenda,
+                } }
+                testId={ {
+                  testOrderId,
+                  testOrderStatus,
+                  testOrderDate,
+                  testOrderTotalPrice,
+                  testOrderAdress,
+                } }
+                haveFooter={ footer }
+              />
+            </Flex>
           </Flex>
-        </Flex>
-      </Link>
+        </Link>
+      </Box>
     )));
 }
 

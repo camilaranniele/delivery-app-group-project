@@ -1,17 +1,26 @@
 import React from 'react';
-import { Center } from '@chakra-ui/react';
+import { Center, Text, Box } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import OrderText from '../../text/orders/OrdersText';
 
 function RequestOrderBox({ role, conteudo, testId }) {
   return (
-    <Center>
-      <OrderText
-        role={ role }
-        conteudo={ conteudo.numeroDoPedido }
-        testId={ testId.testOrderId }
-        orderId={ conteudo.numeroDoPedido }
-      />
+    <Center
+      padding="0.5em"
+      fontSize="1.2em"
+      bg="whiteAlpha.100"
+    >
+      <Box>
+        <Text>
+          Pedido
+        </Text>
+        <OrderText
+          role={ role }
+          conteudo={ conteudo.numeroDoPedido }
+          testId={ testId.testOrderId }
+          orderId={ conteudo.numeroDoPedido }
+        />
+      </Box>
     </Center>
   );
 }
