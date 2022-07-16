@@ -61,8 +61,14 @@ function ProductsCheckout() {
       <Table
         productsInStore={ productsInStore }
         removeItenInListProducts={ removeItenInListProducts }
+        fullPrice={ Number(checkoutTotalPrice) }
+        idIndex="customer_checkout__element-order-table-item-number-"
+        idName="customer_checkout__element-order-table-name-"
+        idQuantity="customer_checkout__element-order-table-quantity-"
+        idPrice="customer_checkout__element-order-table-unit-price-"
+        idSubTotal="customer_checkout__element-order-table-sub-total-"
+        idTotalPrice="customer_checkout__element-order-total-price"
       />
-      <p>{ Number(checkoutTotalPrice).toFixed(2) }</p>
     </div>
 
   );
