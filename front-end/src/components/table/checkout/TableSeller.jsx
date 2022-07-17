@@ -4,6 +4,7 @@ import { requestCreateSale } from '../../../services/request';
 import context from '../../../context';
 import CheckoutSelect from '../../select/CheckoutSelect';
 import CheckoutInput from '../../input/CheckoutInput';
+// test push
 
 function TableSeller() {
   const { sellers } = useContext(context);
