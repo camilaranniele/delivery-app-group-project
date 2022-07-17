@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { requestCreateSale } from '../../services/request';
-import context from '../../context';
-import CheckoutSelect from '../select/CheckoutSelect';
-import CheckoutInput from '../input/CheckoutInput';
+import { useHistory } from 'react-router-dom';
+import { requestCreateSale } from '../../../services/request';
+import context from '../../../context';
+import CheckoutSelect from '../../select/CheckoutSelect';
+import CheckoutInput from '../../input/CheckoutInput';
 
 function TableSeller() {
   const { sellers } = useContext(context);
@@ -10,18 +11,17 @@ function TableSeller() {
   const [deliveryNumber, setDeliveryNumber] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [sellerId, setSellerId] = useState(sellers[0].id);
-  const [idForURL, setIdForURL] = useState(0);
+  const history = useHistory();
 
   const Storage = {
     remove: (key) => localStorage.removeItem(key),
     set: (key, item) => localStorage.setItem(key, JSON.stringify(item)),
     get: (key) => localStorage.getItem(key),
   };
-  console.log(idForURL);
 
   const requestForInsertSaleInDB = async (body, token) => {
-    const request = await requestCreateSale('/sales', body, token);
-    setIdForURL(request);
+    const { id } = await requestCreateSale('/sales', body, token);
+    history.push(`/customer/orders/${id}`);
   };
 
   const handleFinishedButton = () => {
