@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import TableSeller from '../components/table/TableSeller';
+import TableSeller from '../components/table/checkout/TableSeller';
 import NavBar from '../components/navBar/NavBar';
 import Table from '../components/table/Table';
 
