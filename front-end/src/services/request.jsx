@@ -42,3 +42,19 @@ export const requestSellers = async (url) => {
   const { data } = await api.get(url);
   return data;
 };
+
+export const requestCreateSale = async (url, body, token) => {
+  // try {
+  //   const request = await api.post(url, body, {
+  //     headers: {
+  //       Authorization: `${token}`,
+  //     },
+  //   });
+  //   return request;
+  // } catch (error) {
+  // return error.response;
+  // }
+  console.log(url);
+  console.log(body);
+  console.log(token);
+};
