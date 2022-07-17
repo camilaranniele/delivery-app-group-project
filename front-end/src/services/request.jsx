@@ -44,17 +44,14 @@ export const requestSellers = async (url) => {
 };
 
 export const requestCreateSale = async (url, body, token) => {
-  // try {
-  //   const request = await api.post(url, body, {
-  //     headers: {
-  //       Authorization: `${token}`,
-  //     },
-  //   });
-  //   return request;
-  // } catch (error) {
-  // return error.response;
-  // }
-  console.log(url);
-  console.log(body);
-  console.log(token);
+  try {
+    const { data } = await api.post(url, body, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    return error.response;
+  }
 };
