@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-// import { requestCreateSale } from '../../services/request';
+import { requestCreateSale } from '../../services/request';
 import context from '../../context';
 import CheckoutSelect from '../select/CheckoutSelect';
 import CheckoutInput from '../input/CheckoutInput';
@@ -10,32 +10,45 @@ function TableSeller() {
   const [deliveryNumber, setDeliveryNumber] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [sellerId, setSellerId] = useState(sellers[0].id);
+  const [idForURL, setIdForURL] = useState(0);
 
   const Storage = {
     remove: (key) => localStorage.removeItem(key),
     set: (key, item) => localStorage.setItem(key, JSON.stringify(item)),
     get: (key) => localStorage.getItem(key),
   };
+  console.log(idForURL);
 
-  const requestForInsertSaleInDB = (body) => {
-    console.log(JSON.stringify(body));
+  const requestForInsertSaleInDB = async (body, token) => {
+    const request = await requestCreateSale('/sales', body, token);
+    setIdForURL(request);
   };
 
   const handleFinishedButton = () => {
     const totalPrice = Storage.get('totalPrice');
-    const products = Storage.get('carrinho');
-    const buySellerInfos = {
-      buySellerId: sellerId,
+    const getProducts = Storage.get('carrinho');
+    const parsedProducts = JSON.parse(getProducts);
+    const userInfos = Storage.get('user');
+    const parsedUserInfos = JSON.parse(userInfos);
+
+    const products = parsedProducts.map((p) => ({
+      id: p.id,
+      name: p.name,
+      quantity: p.quantity,
+    }));
+
+    const user = {
+      sellerId,
       totalPrice: Number(totalPrice),
-      userNumberAddress: deliveryNumber,
-      userAddress: deliveryAddress,
+      deliveryNumber,
+      deliveryAddress,
       products,
     };
 
-    Storage.set('buySellerInfos', buySellerInfos);
+    Storage.set('buySellerInfos', user);
     setDeliveryNumber('');
     setDeliveryAddress('');
-    requestForInsertSaleInDB(buySellerInfos);
+    requestForInsertSaleInDB(user, parsedUserInfos.token);
   };
 
   useEffect(() => {
