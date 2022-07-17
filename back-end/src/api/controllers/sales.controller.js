@@ -1,4 +1,7 @@
 const UserService = require('../services/user.service');
+const SaleService = require('../services/sale.service');
+
+const internalServerError = 'Internal server error';
 
 const readSales = async (req, res) => {
   try {
@@ -11,7 +14,7 @@ const readSales = async (req, res) => {
     const sales = await UserService.readSales(id, role === 'seller');
     res.status(200).json(sales);
   } catch (_err) {
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: internalServerError });
   }
 };
 
@@ -28,11 +31,22 @@ const readSalesDetails = async (req, res) => {
     res.status(200).json(sales);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: internalServerError });
+  }
+};
+
+const create = async (req, res) => {
+  try {
+    const { id: userId } = req.user;
+    const saleId = await SaleService.create(userId, req.body);
+    res.status(201).json({ id: saleId });
+  } catch (err) {
+    res.status(500).json({ error: internalServerError });
   }
 };
 
 module.exports = {
   readSales,
   readSalesDetails,
+  create,
 };
