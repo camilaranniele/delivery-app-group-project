@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { requestRegister } from '../../services/request';
 
-const CONFLICT_ERROR = 409;
+const BAD_REQUEST = 400;
 const testId = 'common_register__element-invalid_register';
 
 function FormRegister() {
@@ -50,12 +50,12 @@ function FormRegister() {
       name, email, password,
     });
 
-    if (response.status === CONFLICT_ERROR) {
+    if (response.status >= BAD_REQUEST) {
       setError(true);
       return;
     }
 
-    localStorage.setItem('user', JSON.stringify(response));
+    localStorage.setItem('user', JSON.stringify(response.data));
 
     return history.push('customer/products');
   };
