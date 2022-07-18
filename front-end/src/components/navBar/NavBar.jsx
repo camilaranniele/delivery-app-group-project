@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
+import context from '../../context';
 import './navBar.css';
 
 function NavBar() {
+  const { setTotalPrice, setproductsForStorage } = useContext(context);
   const [userName, setUserName] = useState('');
+  const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     const userValues = localStorage.getItem('user');
@@ -13,15 +18,26 @@ function NavBar() {
   const handleClickLogout = () => {
     localStorage.clear();
   };
+
+  const handleClickProducts = () => {
+    if (location.pathname !== '/customer/products') {
+      localStorage.removeItem('carrinho');
+      localStorage.removeItem('totalPrice');
+      setproductsForStorage([]);
+      setTotalPrice(0);
+      history.push('/customer/products');
+    }
+  };
   return (
     <div className="topnav">
-      <a
-      // falta a rota
-        href="#prdutos"
+      <button
+        type="button"
+        onClick={ handleClickProducts }
         data-testid="customer_products__element-navbar-link-products"
       >
         produtos
-      </a>
+      </button>
+
       <a
       // falta a rota
         href="#meusPedidos"
