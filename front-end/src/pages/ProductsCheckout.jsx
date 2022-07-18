@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import TableSeller from '../components/table/checkout/TableSeller';
 import NavBar from '../components/navBar/NavBar';
 import Table from '../components/table/Table';
 
@@ -57,18 +58,25 @@ function ProductsCheckout() {
 
   return (
     <div>
-      <NavBar />
-      <Table
-        productsInStore={ productsInStore }
-        removeItenInListProducts={ removeItenInListProducts }
-        fullPrice={ Number(checkoutTotalPrice) }
-        idIndex="customer_checkout__element-order-table-item-number-"
-        idName="customer_checkout__element-order-table-name-"
-        idQuantity="customer_checkout__element-order-table-quantity-"
-        idPrice="customer_checkout__element-order-table-unit-price-"
-        idSubTotal="customer_checkout__element-order-table-sub-total-"
-        idTotalPrice="customer_checkout__element-order-total-price"
-      />
+      <header>
+        <NavBar />
+      </header>
+      <main>
+        <Table
+          productsInStore={ productsInStore }
+          removeItenInListProducts={ removeItenInListProducts }
+          fullPrice={ Number(checkoutTotalPrice) }
+          idIndex="customer_checkout__element-order-table-item-number-"
+          idName="customer_checkout__element-order-table-name-"
+          idQuantity="customer_checkout__element-order-table-quantity-"
+          idPrice="customer_checkout__element-order-table-unit-price-"
+          idSubTotal="customer_checkout__element-order-table-sub-total-"
+          idTotalPrice="customer_checkout__element-order-total-price"
+        />
+      </main>
+      <footer>
+        <TableSeller />
+      </footer>
     </div>
 
   );

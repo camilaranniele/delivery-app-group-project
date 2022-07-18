@@ -14,11 +14,11 @@ function Table({
   idTotalPrice,
   fullPrice,
 }) {
-  const [isButton, setIsButton] = useState(false);
+  const [isRender, setIsRender] = useState(false);
   const localtion = useLocation();
 
   useEffect(() => {
-    if (localtion.pathname === '/customer/checkout') { setIsButton(true); }
+    if (localtion.pathname === '/customer/checkout') { setIsRender(true); }
   }, [localtion.pathname]);
 
   return (
@@ -31,7 +31,7 @@ function Table({
             <th>quantidade</th>
             <th>Valor unitário</th>
             <th>Sub-total</th>
-            <th>Remover Item</th>
+            { isRender && <th> Remover Item</th> }
           </tr>
         </thead>
         <tbody>
@@ -66,7 +66,7 @@ function Table({
                       `${idPrice}${index}`
                     }
                   >
-                    { price }
+                    { Number(price).toFixed(2).toString().replace('.', ',') }
                   </td>
                   <td
                     data-testid={
@@ -76,7 +76,7 @@ function Table({
                     { totalPrice.toFixed(2).toString().replace('.', ',') }
                   </td>
                   {
-                    isButton
+                    isRender
                     && <ButtonCheckout
                       id={ id }
                       removeItenInListProducts={ removeItenInListProducts }
