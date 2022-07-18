@@ -104,10 +104,16 @@ const readSalesDetails = async (id, userId, seller = false) => {
   return salesFounded.map((sale) => sale.dataValues);
 };
 
+const getUsers = async () => {
+  const allUsers = await users.findAll();
+  return allUsers;
+};
+
 module.exports = {
   createUser,
   login,
   createUserByAdmin,
   readSales,
   readSalesDetails,
+  getUsers,
 };

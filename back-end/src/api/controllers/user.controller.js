@@ -37,8 +37,18 @@ const createUserByAdmin = async (req, res) => {
   }
 };
 
+const getUsers = async (req, res) => {
+  try {
+    const allUsers = await UserService.getUsers();
+    return res.status(200).json(allUsers);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createUser,
   login,
   createUserByAdmin,
+  getUsers,
 };

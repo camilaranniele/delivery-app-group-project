@@ -11,5 +11,6 @@ userRouter.post('/register',
 (req, res, next) => UserMiddleware.userValidation(req, res, next, userSchema),
  UserController.createUser);
 userRouter.post('/login', userLoginValidation, UserController.login);
+userRouter.get('/', UserController.getUsers);
 
 module.exports = userRouter;
