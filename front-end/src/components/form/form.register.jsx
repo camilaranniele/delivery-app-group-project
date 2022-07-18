@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Heading,
+  Box,
+  Flex,
+  Stack,
+} from '@chakra-ui/react';
 import { requestRegister } from '../../services/request';
 
 const CONFLICT_ERROR = 409;
@@ -51,55 +61,70 @@ function FormRegister() {
   };
 
   return (
-    <div>
-      <form>
-        <label htmlFor="name">
-          Nome
-          <input
-            type="text"
-            name="name"
-            value={ name }
-            data-testid="common_register__input-name"
-            onChange={ ({ target }) => setName(target.value) }
-          />
-        </label>
+    <Flex minH="100vh" align="center" justify="center">
+      <Box>
 
-        <label htmlFor="email">
-          E-mail
-          <input
-            type="email"
-            name="email"
-            value={ email }
-            data-testid="common_register__input-email"
-            onChange={ ({ target }) => setEmail(target.value) }
-          />
-        </label>
+        <Stack align="center">
+          <Heading color="gray" p="4">Cadastro</Heading>
+        </Stack>
 
-        <label htmlFor="password">
-          Senha
-          <input
-            type="password"
-            name="password"
-            value={ password }
-            data-testid="common_register__input-password"
-            onChange={ ({ target }) => setPassword(target.value) }
-          />
-        </label>
+        <Box borderWidth="1px" p="6" w={ 425 } bg="gray.100" boxShadow="md">
+          <FormControl display="flex" flexDir="column">
+            <FormLabel htmlFor="name" m="2" color="green.600">Nome</FormLabel>
+            <Input
+              height="70"
+              bg="white"
+              type="text"
+              name="name"
+              value={ name }
+              data-testid="common_register__input-name"
+              onChange={ ({ target }) => setName(target.value) }
+            />
 
-        <button
-          type="submit"
-          data-testid="common_register__button-register"
-          disabled={ isDisable }
-          onClick={ handleSubmit }
-        >
-          Cadastrar
-        </button>
+            <FormLabel htmlFor="email" m="2" color="green.600">E-mail</FormLabel>
+            <Input
+              height="70"
+              bg="white"
+              type="email"
+              name="email"
+              value={ email }
+              data-testid="common_register__input-email"
+              onChange={ ({ target }) => setEmail(target.value) }
+            />
 
-      </form>
+            <FormLabel htmlFor="password" m="2" color="green.600">Senha</FormLabel>
+            <Input
+              height="70"
+              bg="white"
+              type="password"
+              name="password"
+              value={ password }
+              data-testid="common_register__input-password"
+              onChange={ ({ target }) => setPassword(target.value) }
+            />
 
-      {error && <span data-testid={ testId }>User already exists</span>}
+            <Button
+              height="59"
+              mt="6"
+              colorScheme="green"
+              opacity="0.5"
+              size="md"
+              type="submit"
+              data-testid="common_register__button-register"
+              disabled={ isDisable }
+              onClick={ handleSubmit }
+            >
+              Cadastrar
+            </Button>
 
-    </div>
+            <Box color="red" p="4" align="center">
+              {error && <span data-testid={ testId }>Usuário já existe</span>}
+            </Box>
+
+          </FormControl>
+        </Box>
+      </Box>
+    </Flex>
   );
 }
 
