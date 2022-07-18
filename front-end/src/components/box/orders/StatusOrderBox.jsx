@@ -44,7 +44,7 @@ function StatusOrderbox({ role, conteudo, testId, haveFooter }) {
         <Box>
           <OrderText
             role={ role }
-            conteudo={ conteudo.dataDaVenda }
+            conteudo={ new Date(conteudo.dataDaVenda).toLocaleDateString('pt-BR') }
             testId={ testId.testOrderDate }
             orderId={ conteudo.numeroDoPedido }
           />
