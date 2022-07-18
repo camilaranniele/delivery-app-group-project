@@ -1,8 +1,13 @@
 import React from 'react';
+import NavBar from '../components/navBar/NavBar';
 
 function Details() {
   return (
-    <h1>hello world!</h1>
+    <div>
+      <header>
+        <NavBar />
+      </header>
+    </div>
   );
 }
 

@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { requestLogin } from '../../services/request';
 import Logo from '../../images/logo.png';
+import useRedirect from '../../hooks/useRedirect';
 
 function LoginForm() {
   const [userEmail, setUserEmail] = useState('');
@@ -20,6 +21,8 @@ function LoginForm() {
   const [disableBtn, setDisableBtn] = useState(true);
   const [hideElement, setHideElement] = useState(true);
   const history = useHistory();
+
+  useRedirect();
 
   useEffect(() => {
     const validateForm = () => {

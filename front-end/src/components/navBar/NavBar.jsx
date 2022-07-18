@@ -8,12 +8,12 @@ function NavBar() {
   const [userName, setUserName] = useState('');
   const location = useLocation();
   const history = useHistory();
+  const userValues = localStorage.getItem('user');
+  const parsedUserValues = JSON.parse(userValues);
 
   useEffect(() => {
-    const userValues = localStorage.getItem('user');
-    const parsedUserValues = JSON.parse(userValues);
     setUserName(parsedUserValues.name);
-  }, []);
+  }, [parsedUserValues.name]);
 
   const handleClickLogout = () => {
     localStorage.clear();
@@ -28,19 +28,25 @@ function NavBar() {
       history.push('/customer/products');
     }
   };
+
   return (
     <div className="topnav">
-      <button
-        type="button"
-        onClick={ handleClickProducts }
-        data-testid="customer_products__element-navbar-link-products"
-      >
-        produtos
-      </button>
+      {
+        parsedUserValues.role === 'customer'
+        && (
+          <button
+            type="button"
+            onClick={ handleClickProducts }
+            data-testid="customer_products__element-navbar-link-products"
+          >
+            produtos
+          </button>
+        )
+      }
 
       <a
       // falta a rota
-        href="#meusPedidos"
+        href={ `/${parsedUserValues.role}/orders` }
         data-testid="customer_products__element-navbar-link-orders"
       >
         meus pedidos

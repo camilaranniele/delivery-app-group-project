@@ -38,6 +38,21 @@ export const requestProdutos = async (url) => {
   return data;
 };
 
+export const requestOrder = async (url, token) => {
+  try {
+    const { data } = await api.get(
+      url,
+      {
+        headers: { Authorization: token },
+      },
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 export const requestSellers = async (url) => {
   const { data } = await api.get(url);
   return data;
