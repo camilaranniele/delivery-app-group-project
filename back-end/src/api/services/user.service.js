@@ -98,7 +98,8 @@ const readSalesDetails = async (id, userId, seller = false) => {
   } else {
     saleFounded = await sales.findOne({
       where: { id, userId },
-      include: [{ model: products, as: 'products' }],
+      include: [{ model: products, as: 'products' },
+      { model: users, as: 'seller', attributes: ['name'] }],
      });
   }
 
