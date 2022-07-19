@@ -39,16 +39,14 @@ describe('Testa Resposta correta para a Rota /Register', () => {
   
     it('Verifica registro de um usuário', async () => {
       okResponse = await chaiRequest(app)
-      .post('users/register')
+      .post('/users/register')
       .send(newUser);
-      console.log('TESTE ----->', okResponse);
-       const { body: { name, email, role, id, token } } = okResponse;
+       const { body: { name, email, role, token } } = okResponse;
   
       expect(okResponse.body).to.be.an('object');
       expect(okResponse).to.have.status(201);
-      expect(okResponse.body).to.haveProperty('token');
-      expect(OkResponse.body).to.have.property('role');
-      expect(id).to.be.equal(returnRegister.id);
+      expect(okResponse.body).to.have.property('token');
+      expect(okResponse.body).to.have.property('role');
       expect(name).to.be.equal(returnRegister.name);
       expect(role).to.be.equal(returnRegister.role);
       expect(email).to.be.equal(returnRegister.email);

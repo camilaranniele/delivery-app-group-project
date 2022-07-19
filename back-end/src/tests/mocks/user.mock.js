@@ -1,8 +1,9 @@
-const newUser = {
-  name: "Cliente Zé Birita",
-  password: "1c37466c159755ce1fa181bd247cb925",
-  email: "zebirita@email.com",
-};
+const newUser = 
+  {
+    "name": "Manoel da Skina",
+    "password": "agoraano2022",
+    "email": "manelskina@email.com"
+  };
 
 const createUser = {
   id: 3,
@@ -43,10 +44,12 @@ const returnToken =
 
 module.exports = {
   createUser,
+  createNewUser,
   loginUser,
   invalidEmail,
   invalidPassword,
   returnRegister,
+  returnNewRegister,
   returnToken,
   newUser,
 };
