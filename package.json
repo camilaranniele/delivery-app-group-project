@@ -54,8 +54,5 @@
       "__TESTDESC__": true,
       "__TESTFILE__": true
     }
-  },
-  "dependencies": {
-    "@chakra-ui/layout": "^2.1.1"
   }
 }
