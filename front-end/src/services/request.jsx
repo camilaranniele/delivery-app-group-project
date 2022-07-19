@@ -75,3 +75,8 @@ export const requestUsers = async (url) => {
   const { data } = await api.get(url);
   return data;
 };
+
+export const deleteUser = async (url) => {
+  const { data } = await api.delete(url);
+  return data;
+};
