@@ -19,6 +19,11 @@ const create = async (userId, sale) => {
   return currSale.id;
 };
 
+const updateStatus = async (saleId, userId, status) => {
+  await sales.update({ status }, { where: { id: saleId, userId } });
+};
+
 module.exports = {
   create,
+  updateStatus,
 };
