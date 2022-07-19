@@ -19,8 +19,14 @@ const create = async (userId, sale) => {
   return currSale.id;
 };
 
-const updateStatus = async (saleId, userId, status) => {
-  await sales.update({ status }, { where: { id: saleId, userId } });
+const updateStatus = async (saleId, user, status) => {
+  if (user.role === 'seller') {
+    await sales.update({ status }, { where: { id: saleId, sellerId: user.id } });
+  } else if (user.role === 'customer') {
+    await sales.update({ status }, { where: { id: saleId, userId: user.id } });
+  } else {
+    throw new Error('Invalid user role');
+  }
 };
 
 module.exports = {
