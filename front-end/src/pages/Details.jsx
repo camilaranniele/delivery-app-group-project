@@ -19,7 +19,6 @@ function Details() {
       const request = await requestOrderDetails(
         `/sales/details/${id}`, token,
       );
-      console.log(request);
       setOrder(request);
     };
     requestApi();

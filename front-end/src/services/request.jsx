@@ -48,7 +48,6 @@ export const requestOrder = async (url, token) => {
     );
     return data;
   } catch (error) {
-    console.log(error);
     return error;
   }
 };
@@ -88,7 +87,6 @@ export const requestOrderDetails = async (url, token) => {
         Authorization: `${token}`,
       },
     });
-    console.log(response);
     return response.data;
   } catch (error) {
     return error.response;
@@ -102,7 +100,6 @@ export const changeOrderStatus = async (url, body, token) => {
         Authorization: `${token}`,
       },
     });
-    console.log(response);
     return response;
   } catch (error) {
     return error.response;
