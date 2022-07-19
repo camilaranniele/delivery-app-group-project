@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Flex, Text } from '@chakra-ui/react';
+import { requestOrderDetails } from '../../../services/request';
 import OrderStatusButton from '../../button/status/OrderStatusButton';
 
 function OrderDetailContainer() {
@@ -46,7 +47,7 @@ function OrderDetailContainer() {
         )
       }
       <Text>
-        {dataDaVenda}
+        {new Date(dataDaVenda).toLocaleDateString('pt-BR')}
       </Text>
       <Text>
         {statusDaVenda}
@@ -54,7 +55,7 @@ function OrderDetailContainer() {
       {
         handleUser
         && (
-          <OrderStatusButton />
+          <OrderStatusButton statusDaVenda={ statusDaVenda } />
         )
       }
     </Flex>
