@@ -80,3 +80,31 @@ export const deleteUser = async (url) => {
   const { data } = await api.delete(url);
   return data;
 };
+
+export const requestOrderDetails = async (url, token) => {
+  try {
+    const response = await api.get(url, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    return error.response;
+  }
+};
+
+export const changeOrderStatus = async (url, body, token) => {
+  try {
+    const response = await api.patch(url, body, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+};
