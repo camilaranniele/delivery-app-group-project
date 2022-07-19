@@ -76,6 +76,7 @@ function FormRegister() {
               bg="white"
               type="text"
               name="name"
+              placeholder="Seu nome"
               value={ name }
               data-testid="common_register__input-name"
               onChange={ ({ target }) => setName(target.value) }
@@ -87,6 +88,7 @@ function FormRegister() {
               bg="white"
               type="email"
               name="email"
+              placeholder="Email"
               value={ email }
               data-testid="common_register__input-email"
               onChange={ ({ target }) => setEmail(target.value) }
@@ -98,6 +100,7 @@ function FormRegister() {
               bg="white"
               type="password"
               name="password"
+              placeholder="*********"
               value={ password }
               data-testid="common_register__input-password"
               onChange={ ({ target }) => setPassword(target.value) }
@@ -107,14 +110,14 @@ function FormRegister() {
               height="59"
               mt="6"
               colorScheme="green"
-              opacity="0.5"
               size="md"
+              fontSize="20px"
               type="submit"
               data-testid="common_register__button-register"
               disabled={ isDisable }
               onClick={ handleSubmit }
             >
-              Cadastrar
+              CADASTRAR
             </Button>
 
             <Box color="red" p="4" align="center">

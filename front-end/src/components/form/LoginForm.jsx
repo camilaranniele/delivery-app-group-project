@@ -113,14 +113,14 @@ function LoginForm() {
               height="59"
               mt="4"
               colorScheme="green"
-              opacity="0.5"
               size="md"
+              fontSize="20px"
               data-testid="common_login__button-login"
               type="submit"
               disabled={ disableBtn }
               onClick={ handleSubmit }
             >
-              Login
+              LOGIN
             </Button>
             <Button
               height="59"
@@ -128,6 +128,7 @@ function LoginForm() {
               colorScheme="green"
               color="green.500"
               size="md"
+              fontSize="20px"
               variant="outline"
               data-testid="common_login__button-register"
               type="button"
@@ -142,7 +143,7 @@ function LoginForm() {
               p="4"
               align="center"
             >
-              { hideElement ? null : <p>Login inválido</p> }
+              { hideElement ? null : <p>Login inválido!</p> }
             </Box>
 
           </FormControl>
