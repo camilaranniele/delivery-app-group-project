@@ -115,6 +115,11 @@ const getUsers = async () => {
   return allUsers;
 };
 
+const deleteUser = async (id) => {
+  const deletedUser = await users.destroy({ where: { id } });
+  return deletedUser;
+};
+
 module.exports = {
   createUser,
   login,
@@ -122,4 +127,5 @@ module.exports = {
   readSales,
   readSalesDetails,
   getUsers,
+  deleteUser,
 };
