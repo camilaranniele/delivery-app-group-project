@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Flex } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
@@ -11,22 +11,11 @@ function OrderStatusButton({ statusDaVenda }) {
   const preparando = 'Preparando';
   const entregue = 'Entregue';
   const pendente = 'Pendente';
-  const [disableBtt, setDisableBtt] = useState({
-    preparing: statusDaVenda === pendente,
-    dispatch: statusDaVenda === preparando,
-    delivery: statusDaVenda === emTransito,
-  });
-
-  console.log(disableBtt);
 
   const handleClick = async (status) => {
     await changeOrderStatus(
       `/sales/status/${id}`, { status }, token,
     );
-    setDisableBtt({
-      ...disableBtt,
-      [status]: true,
-    });
   };
 
   return (
@@ -38,7 +27,7 @@ function OrderStatusButton({ statusDaVenda }) {
               name="delivery"
               data-testid="customer_order_details__button-delivery-check"
               onClick={ () => handleClick(entregue) }
-              disabled={ disableBtt.delivery }
+              disabled={ statusDaVenda !== emTransito }
             >
               Marcar como entregue
             </Button>
@@ -48,7 +37,7 @@ function OrderStatusButton({ statusDaVenda }) {
                 name="preparing"
                 data-testid="seller_order_details__button-preparing-check"
                 onClick={ () => handleClick(preparando) }
-                disabled={ disableBtt.preparing }
+                disabled={ statusDaVenda !== pendente }
               >
                 Preparar pedido
               </Button>
@@ -56,7 +45,7 @@ function OrderStatusButton({ statusDaVenda }) {
                 name="dispatch"
                 data-testid="seller_order_details__button-dispatch-check"
                 onClick={ () => handleClick(emTransito) }
-                disabled={ disableBtt.dispatch }
+                disabled={ statusDaVenda !== preparando }
               >
                 Saiu para entrega
               </Button>
