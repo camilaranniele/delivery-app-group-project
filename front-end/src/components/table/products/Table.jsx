@@ -36,8 +36,9 @@ function Table({
         </thead>
         <tbody>
           {
-            productsInStore.map(({ id, name, price, quantity }, index) => {
-              const totalPrice = Number(price) * quantity;
+            productsInStore.map(({ id, name, price, salesProducts, quantity }, index) => {
+              const totalPrice = (Number(price) * quantity)
+              || Number(price) * salesProducts.quantity;
               return (
                 <tr key={ id }>
                   <td
@@ -59,7 +60,7 @@ function Table({
                       `${idQuantity}${index}`
                     }
                   >
-                    { quantity }
+                    { quantity || salesProducts.quantity }
                   </td>
                   <td
                     data-testid={
@@ -73,7 +74,7 @@ function Table({
                       `${idSubTotal}${index}`
                     }
                   >
-                    { totalPrice.toFixed(2).toString().replace('.', ',') }
+                    { Number(totalPrice).toFixed(2).toString().replace('.', ',') }
                   </td>
                   {
                     isRender
