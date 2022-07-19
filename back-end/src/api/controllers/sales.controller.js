@@ -46,11 +46,11 @@ const create = async (req, res) => {
 
 const updateStatus = async (req, res) => {
   try {
-    const { id: userId } = req.user;
+    const { user } = req;
     const { id: saleId } = req.params;
     const { status } = req.body;
 
-    await SaleService.updateStatus(saleId, userId, status);
+    await SaleService.updateStatus(saleId, user, status);
     
     res.status(204).send();
   } catch (err) {
