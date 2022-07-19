@@ -19,6 +19,7 @@
     "lint:styles": "stylelint **/*.css --config .stylelintrc.json --ignore-disables --allow-empty-input"
   },
   "dependencies": {
+    "@chakra-ui/layout": "^2.1.1",
     "@chakra-ui/react": "^1.8.8",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
