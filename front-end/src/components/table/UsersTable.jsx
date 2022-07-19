@@ -32,13 +32,29 @@ function UsersTable() {
           {
             users.map(({ id, name, email, role }) => (
               <tr key={ id }>
-                <td data-testid="admin_manage__element-user-table-item-number">{id}</td>
-                <td data-testid="admin_manage__element-user-table-name">{name}</td>
-                <td data-testid="admin_manage__element-user-table-email">{email}</td>
-                <td data-testid="admin_manage__element-user-table-role">{role}</td>
+                <td
+                  data-testid={ `admin_manage__element-user-table-item-number-${id}` }
+                >
+                  {id}
+                </td>
+                <td
+                  data-testid={ `admin_manage__element-user-table-name-${id}` }
+                >
+                  {name}
+                </td>
+                <td
+                  data-testid={ `admin_manage__element-user-table-email-${id}` }
+                >
+                  {email}
+                </td>
+                <td
+                  data-testid={ `admin_manage__element-user-table-role-${id}` }
+                >
+                  {role}
+                </td>
                 <td>
                   <button
-                    data-testid="admin_manage__element-user-table-remove"
+                    data-testid={ `admin_manage__element-user-table-remove-${id}` }
                     type="submit"
                     onClick={ () => deleteUserButton(id) }
                   >
