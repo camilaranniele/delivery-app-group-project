@@ -16,8 +16,8 @@ function DetailTable({ carrinho }) {
       idName={ `${role}_order_details__element-order-table-name-` }
       idQuantity={ `${role}_order_details__element-order-table-quantity-` }
       idPrice={ `${role}_order_details__element-order-table-sub-total-` }
-      idSubTotal={ `${role}_order_details__element-order-total-price-` }
-      idTotalPrice={ `${role}_order_details__element-order-table-unit-price-` }
+      idSubTotal={ `${role}_order_details__element-order-table-unit-price-` }
+      idTotalPrice={ `${role}_order_details__element-order-total-price` }
     />
   );
 }
