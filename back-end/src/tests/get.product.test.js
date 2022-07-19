@@ -14,7 +14,6 @@ let chaiRequest = chai.request;
 
 const { expect } = chai;
 
-
 describe('Testa Resposta correta para a Rota /products', () => {
   let OkResponse;
 
