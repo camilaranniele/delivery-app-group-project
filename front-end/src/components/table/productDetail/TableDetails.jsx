@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Table from '../products/Table';
 
-function DetailTable({ role }) {
-  const productsInStore = JSON.parse(localStorage.getItem('carrinho'));
-  const checkoutTotalPrice = JSON.parse(localStorage.getItem('totalPrice'));
+function DetailTable({ carrinho }) {
+  const productsInStore = carrinho.products;
+  const checkoutTotalPrice = carrinho.totalPrice;
+  const userLocal = JSON.parse(localStorage.getItem('user'));
+  const { role } = userLocal;
 
   return (
     <Table
@@ -21,7 +23,10 @@ function DetailTable({ role }) {
 }
 
 DetailTable.propTypes = {
-  role: PropTypes.string.isRequired,
+  carrinho: PropTypes.shape({
+    products: PropTypes.arrayOf(PropTypes.shape),
+    totalPrice: PropTypes.string,
+  }).isRequired,
 };
 
 export default DetailTable;
