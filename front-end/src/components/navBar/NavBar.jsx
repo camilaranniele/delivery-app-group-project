@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import { Box, Flex, Button } from '@chakra-ui/react';
 import context from '../../context';
-import './navBar.css';
 
 function NavBar() {
   const { setTotalPrice, setproductsForStorage } = useContext(context);
@@ -17,6 +17,7 @@ function NavBar() {
 
   const handleClickLogout = () => {
     localStorage.clear();
+    history.push('/');
   };
 
   const handleClickProducts = () => {
@@ -29,41 +30,82 @@ function NavBar() {
     }
   };
 
+  const handleClickOrders = () => {
+    history.push(`/${parsedUserValues.role}/orders`);
+  };
+
   return (
-    <div className="topnav">
-      {
-        parsedUserValues.role === 'customer'
+    <Box maxW="1920px" bg="green.500">
+      <Flex alignItems="center" justifyContent="space-between">
+        <Flex>
+          {
+            parsedUserValues.role === 'customer'
         && (
-          <button
+          <Button
+            w="270px"
+            h="80px"
+            p="6"
+            borderRadius="none"
+            _hover="none"
+            bg="green.300"
             type="button"
             onClick={ handleClickProducts }
             data-testid="customer_products__element-navbar-link-products"
           >
-            produtos
-          </button>
+            PRODUTOS
+          </Button>
         )
-      }
+          }
 
-      <a
-      // falta a rota
-        href={ `/${parsedUserValues.role}/orders` }
-        data-testid="customer_products__element-navbar-link-orders"
-      >
-        meus pedidos
-      </a>
-      <span
-        data-testid="customer_products__element-navbar-user-full-name"
-      >
-        { userName }
-      </span>
-      <a
-        href="/"
-        onClick={ handleClickLogout }
-        data-testid="customer_products__element-navbar-link-logout"
-      >
-        sair
-      </a>
-    </div>
+          <Button
+            w="230px"
+            h="80px"
+            p="6"
+            borderRadius="none"
+            _hover="none"
+            bg="green.500"
+            color="white"
+            onClick={ handleClickOrders }
+            data-testid="customer_products__element-navbar-link-orders"
+          >
+            MEUS PEDIDOS
+          </Button>
+
+        </Flex>
+
+        <Flex>
+          <Button
+            w="270px"
+            h="80px"
+            p="2"
+            borderRadius="none"
+            _hover="none"
+            bg="purple.500"
+            color="white"
+            fontSize="20px"
+            alignContent="center"
+            data-testid="customer_products__element-navbar-user-full-name"
+          >
+            { userName }
+          </Button>
+
+          <Button
+            w="150px"
+            h="80px"
+            p="6"
+            borderRadius="none"
+            _hover="none"
+            bg="blue.500"
+            color="white"
+            fontSize="20px"
+            onClick={ handleClickLogout }
+            data-testid="customer_products__element-navbar-link-logout"
+          >
+            SAIR
+          </Button>
+        </Flex>
+      </Flex>
+    </Box>
   );
 }
 
