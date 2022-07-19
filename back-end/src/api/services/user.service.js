@@ -1,3 +1,5 @@
+const { Op } = require('sequelize');
+
 const { users, sales, products } = require('../../database/models');
 
 const { hash, verify } = require('../utils/md5');
@@ -104,10 +106,26 @@ const readSalesDetails = async (id, userId, seller = false) => {
   return salesFounded.map((sale) => sale.dataValues);
 };
 
+const getUsers = async () => {
+  const allUsers = await users.findAll({
+    where: { role: {
+      [Op.not]: 'administrator',
+    } },
+    attributes: ['id', 'name', 'email', 'role'] });
+  return allUsers;
+};
+
+const deleteUser = async (id) => {
+  const deletedUser = await users.destroy({ where: { id } });
+  return deletedUser;
+};
+
 module.exports = {
   createUser,
   login,
   createUserByAdmin,
   readSales,
   readSalesDetails,
+  getUsers,
+  deleteUser,
 };
