@@ -1,3 +1,5 @@
+const { Op } = require('sequelize');
+
 const { users, sales, products } = require('../../database/models');
 
 const { hash, verify } = require('../utils/md5');
@@ -105,7 +107,11 @@ const readSalesDetails = async (id, userId, seller = false) => {
 };
 
 const getUsers = async () => {
-  const allUsers = await users.findAll();
+  const allUsers = await users.findAll({
+    where: { role: {
+      [Op.not]: 'administrator',
+    } },
+    attributes: ['id', 'name', 'email', 'role'] });
   return allUsers;
 };
 
