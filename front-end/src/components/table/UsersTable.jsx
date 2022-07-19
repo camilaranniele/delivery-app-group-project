@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { requestUsers } from '../../services/request';
+import { requestUsers, deleteUser } from '../../services/request';
 
 function UsersTable() {
   const [users, setUsers] = useState([]);
@@ -10,6 +10,10 @@ function UsersTable() {
     }
     fetchUsers();
   }, [users]);
+
+  async function deleteUserButton(id) {
+    await deleteUser(`/users/${id}`);
+  }
 
   return (
     <div>
@@ -32,7 +36,14 @@ function UsersTable() {
                 <td>{name}</td>
                 <td>{email}</td>
                 <td>{role}</td>
-                <td><button type="submit">Excluir</button></td>
+                <td>
+                  <button
+                    type="submit"
+                    onClick={ () => deleteUserButton(id) }
+                  >
+                    Excluir
+                  </button>
+                </td>
               </tr>
             ))
           }
