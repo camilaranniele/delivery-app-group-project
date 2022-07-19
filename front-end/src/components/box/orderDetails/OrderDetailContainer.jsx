@@ -22,34 +22,49 @@ function OrderDetailContainer() {
 
   const {
     id: numeroDoPedido,
-    pessoa: clienteOuVendedor,
+    seller: vendedor,
     saleDate: dataDaVenda,
     status: statusDaVenda,
   } = orders;
+
+  console.log(orders);
 
   const handleUser = () => {
     if (role === 'seller') {
       return true;
     }
+    return false;
   };
 
   return (
     <Flex>
-      <Text>
+      <Text
+        data-testid={ `${role}_order_details__element-order-details-label-order-id` }
+      >
         {numeroDoPedido}
       </Text>
       {
-        handleUser
+        role === 'customer'
         && (
-          <Text>
-            {clienteOuVendedor}
+          <Text
+            data-testid={
+              `${role}_order_details__element-order-details-label-seller-name`
+            }
+          >
+            {vendedor?.name}
           </Text>
         )
       }
-      <Text>
+      <Text
+        data-testid={ `${role}_order_details__element-order-details-label-order-date` }
+      >
         {new Date(dataDaVenda).toLocaleDateString('pt-BR')}
       </Text>
-      <Text>
+      <Text
+        data-testid={
+          `${role}_order_details__element-order-details-label-delivery-status`
+        }
+      >
         {statusDaVenda}
       </Text>
       {
