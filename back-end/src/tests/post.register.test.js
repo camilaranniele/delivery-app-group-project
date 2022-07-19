@@ -18,7 +18,7 @@ let chaiRequest = chai.request;
 
 const { expect } = chai;
 
-describe('Testa Resposta correta para a Rota /Register', () => {
+describe('Testa Resposta correta para a Rota users/Register', () => {
     let okResponse;
     before(async () => {
       sinon
