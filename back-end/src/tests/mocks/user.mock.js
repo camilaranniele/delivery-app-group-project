@@ -44,12 +44,10 @@ const returnToken =
 
 module.exports = {
   createUser,
-  createNewUser,
   loginUser,
   invalidEmail,
   invalidPassword,
   returnRegister,
-  returnNewRegister,
   returnToken,
   newUser,
 };
