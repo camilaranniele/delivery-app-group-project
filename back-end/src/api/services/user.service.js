@@ -88,22 +88,25 @@ const readSales = async (id, seller = false) => {
 };
 
 const readSalesDetails = async (id, userId, seller = false) => {
-  let salesFounded = [];
+  let saleFounded = {};
 
   if (seller) {
-    salesFounded = await sales.findAll({
+    saleFounded = await sales.findOne({
       where: { id, sellerId: userId },
       include: [{ model: products, as: 'products' }],
     });
   } else {
-    salesFounded = await sales.findAll({ where: { id, userId } });
+    saleFounded = await sales.findOne({
+      where: { id, userId },
+      include: [{ model: products, as: 'products' }],
+     });
   }
 
-  if (!salesFounded) {
+  if (!saleFounded) {
     return { code: 404, error: userNotFound };
   }
 
-  return salesFounded.map((sale) => sale.dataValues);
+  return saleFounded.dataValues;
 };
 
 const getUsers = async () => {
