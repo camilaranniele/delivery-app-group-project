@@ -8,9 +8,7 @@ function AdminPage() {
   return (
     <Box>
       <AdminNavBar />
-      <VStack
-        centerContent
-      >
+      <VStack>
         <AdminRegister />
         <UsersTable />
       </VStack>
