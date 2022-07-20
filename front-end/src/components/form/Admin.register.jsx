@@ -72,7 +72,7 @@ function AdminRegister() {
   };
 
   return (
-    <Box p="6">
+    <Box w="80%" p="6">
       <Heading as="h3" size="md" color="gray.500">Cadastrar novo usuário</Heading>
 
       <FormControl
@@ -80,8 +80,8 @@ function AdminRegister() {
         bg="gray.100"
         boxShadow="base"
       >
-        <Flex alignItems="center">
-          <Box mr="5px">
+        <Flex alignItems="center" justifyContent="space-around">
+          <Box>
             <FormLabel htmlFor="name">Nome</FormLabel>
             <Input
               bg="white"
@@ -95,7 +95,7 @@ function AdminRegister() {
             />
           </Box>
 
-          <Box mr="5px">
+          <Box>
             <FormLabel htmlFor="email">E-mail</FormLabel>
             <Input
               bg="white"
@@ -109,7 +109,7 @@ function AdminRegister() {
             />
           </Box>
 
-          <Box mr="5px">
+          <Box>
             <FormLabel htmlFor="password">Senha</FormLabel>
             <Input
               bg="white"
