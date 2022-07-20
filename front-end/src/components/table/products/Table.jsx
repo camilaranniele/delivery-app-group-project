@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ButtonCheckout from '../button/checkout/ButtonCheckout';
+import ButtonCheckout from '../../button/checkout/ButtonCheckout';
 
 function Table({
   productsInStore,
@@ -36,8 +36,9 @@ function Table({
         </thead>
         <tbody>
           {
-            productsInStore.map(({ id, name, price, quantity }, index) => {
-              const totalPrice = Number(price) * quantity;
+            productsInStore.map(({ id, name, price, salesProducts, quantity }, index) => {
+              const totalPrice = (Number(price) * quantity)
+              || Number(price) * salesProducts.quantity;
               return (
                 <tr key={ id }>
                   <td
@@ -59,7 +60,7 @@ function Table({
                       `${idQuantity}${index}`
                     }
                   >
-                    { quantity }
+                    { quantity || salesProducts.quantity }
                   </td>
                   <td
                     data-testid={
@@ -73,7 +74,7 @@ function Table({
                       `${idSubTotal}${index}`
                     }
                   >
-                    { totalPrice.toFixed(2).toString().replace('.', ',') }
+                    { Number(totalPrice).toFixed(2).toString().replace('.', ',') }
                   </td>
                   {
                     isRender
@@ -99,6 +100,10 @@ function Table({
   );
 }
 
+Table.defaultProps = {
+  removeItenInListProducts: () => {},
+};
+
 Table.propTypes = {
   productsInStore: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -106,7 +111,7 @@ Table.propTypes = {
     price: PropTypes.string.isRequired,
     quantity: PropTypes.number.isRequired,
   })).isRequired,
-  removeItenInListProducts: PropTypes.func.isRequired,
+  removeItenInListProducts: PropTypes.func,
   idIndex: PropTypes.string.isRequired,
   idName: PropTypes.string.isRequired,
   idQuantity: PropTypes.string.isRequired,
