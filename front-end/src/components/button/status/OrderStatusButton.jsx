@@ -12,11 +12,11 @@ function OrderStatusButton({ statusDaVenda }) {
   const entregue = 'Entregue';
   const pendente = 'Pendente';
 
-  const handleClick = async (status) => {
-    await changeOrderStatus(
-      `/sales/status/${id}`, { status }, token,
-    );
-  };
+  const handleClick = (status) => changeOrderStatus(
+    `/sales/status/${id}`, { status }, token,
+  ).then(() => {
+    window.location.reload(false);
+  });
 
   return (
     <Flex>
