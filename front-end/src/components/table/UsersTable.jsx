@@ -34,11 +34,11 @@ function UsersTable() {
       <Table size="sd" boxShadow="base">
         <Thead>
           <Tr>
-            <Th>Item</Th>
-            <Th>Nome</Th>
-            <Th>E-mail</Th>
-            <Th>Tipo</Th>
-            <Th>Excluir</Th>
+            <Th textAlign="center">Item</Th>
+            <Th textAlign="center">Nome</Th>
+            <Th textAlign="center">E-mail</Th>
+            <Th textAlign="center">Tipo</Th>
+            <Th textAlign="center">Excluir</Th>
           </Tr>
         </Thead>
 
@@ -48,6 +48,7 @@ function UsersTable() {
               <Tr key={ id } fontSize="18px">
 
                 <Td
+                  textAlign="center"
                   bg="green.300"
                   data-testid={ `admin_manage__element-user-table-item-number-${id}` }
                 >
@@ -55,6 +56,7 @@ function UsersTable() {
                 </Td>
 
                 <Td
+                  textAlign="center"
                   bg="gray.200"
                   data-testid={ `admin_manage__element-user-table-name-${id}` }
                 >
@@ -62,6 +64,7 @@ function UsersTable() {
                 </Td>
 
                 <Td
+                  textAlign="center"
                   bg="green.500"
                   color="white"
                   data-testid={ `admin_manage__element-user-table-email-${id}` }
@@ -70,6 +73,7 @@ function UsersTable() {
                 </Td>
 
                 <Td
+                  textAlign="center"
                   bg="purple.500"
                   color="white"
                   data-testid={ `admin_manage__element-user-table-role-${id}` }
@@ -79,6 +83,7 @@ function UsersTable() {
 
                 <Td bg="blue.500">
                   <Button
+                    w="full"
                     bg="blue.500"
                     color="white"
                     _hover="none"
