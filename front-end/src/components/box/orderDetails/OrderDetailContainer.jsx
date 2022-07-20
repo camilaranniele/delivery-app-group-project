@@ -18,7 +18,7 @@ function OrderDetailContainer() {
       setOrders(request);
     };
     requestApi();
-  }, [role, token, id]);
+  }, [role, token, id, orders]);
 
   const {
     id: numeroDoPedido,
