@@ -12,7 +12,7 @@ import {
   Img,
 } from '@chakra-ui/react';
 import { requestAdminRegister } from '../../services/request';
-import Select from '../input/SelectInput';
+import SelectAdmin from '../input/SelectInput';
 import warning from '../../images/warning.png';
 import success from '../../images/accept.png';
 
@@ -123,10 +123,7 @@ function AdminRegister() {
             />
           </Box>
 
-          <Select
-            data-testid="admin_manage__select-role"
-            onChange={ ({ target }) => setRole(target.value) }
-          />
+          <SelectAdmin setRole={ setRole } />
 
           <Button
             colorScheme="green"
@@ -141,7 +138,7 @@ function AdminRegister() {
 
         </Flex>
 
-        <Box align="center" pt="3">
+        <Box pt="3" w="50%">
           {error
           && (
             <Alert status="error">
@@ -157,9 +154,9 @@ function AdminRegister() {
           {userCreated
           && (
             <Alert status="success">
-              <Img src={ success } alt="warning de erro" boxSize="20px" mr="5px" />
+              <Img src={ success } alt="warning de erro" boxSize="15px" mr="5px" />
               <AlertTitle>
-                Usuário cadastrado com sucesso
+                Usuário cadastrado com sucesso!
               </AlertTitle>
             </Alert>
           )}
