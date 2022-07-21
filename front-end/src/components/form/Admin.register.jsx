@@ -1,5 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import {
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Heading,
+  Flex,
+  Alert,
+  AlertTitle,
+  Img,
+} from '@chakra-ui/react';
 import { requestAdminRegister } from '../../services/request';
+import SelectAdmin from '../input/SelectInput';
+import warning from '../../images/warning.png';
+import success from '../../images/accept.png';
 
 const CONFLICT_ERROR = 409;
 const DATA_TESTID_ERROR = 'admin_manage__element-invalid-register';
@@ -57,66 +72,98 @@ function AdminRegister() {
   };
 
   return (
-    <div>
-      <form>
-        <label htmlFor="name">
-          Nome
-          <input
-            type="text"
-            name="name"
-            value={ name }
-            data-testid="admin_manage__input-name"
-            onChange={ ({ target }) => setName(target.value) }
-          />
-        </label>
+    <Box w="80%" p="6">
+      <Heading as="h3" size="md" color="gray.500">Cadastrar novo usuário</Heading>
 
-        <label htmlFor="email">
-          E-mail
-          <input
-            type="email"
-            name="email"
-            value={ email }
-            data-testid="admin_manage__input-email"
-            onChange={ ({ target }) => setEmail(target.value) }
-          />
-        </label>
+      <FormControl
+        p="4"
+        bg="gray.100"
+        boxShadow="base"
+      >
+        <Flex alignItems="center" justifyContent="space-around">
+          <Box>
+            <FormLabel htmlFor="name">Nome</FormLabel>
+            <Input
+              bg="white"
+              borderColor="black"
+              type="text"
+              name="name"
+              placeholder="Nome e sobrenome"
+              value={ name }
+              data-testid="admin_manage__input-name"
+              onChange={ ({ target }) => setName(target.value) }
+            />
+          </Box>
 
-        <label htmlFor="password">
-          Senha
-          <input
-            type="password"
-            name="password"
-            value={ password }
-            data-testid="admin_manage__input-password"
-            onChange={ ({ target }) => setPassword(target.value) }
-          />
-        </label>
+          <Box>
+            <FormLabel htmlFor="email">E-mail</FormLabel>
+            <Input
+              bg="white"
+              borderColor="black"
+              type="email"
+              name="email"
+              placeholder="seuemail@site.com"
+              value={ email }
+              data-testid="admin_manage__input-email"
+              onChange={ ({ target }) => setEmail(target.value) }
+            />
+          </Box>
 
-        <label htmlFor="role">
-          Role
-          <select
-            data-testid="admin_manage__select-role"
-            onChange={ ({ target }) => setRole(target.value) }
+          <Box>
+            <FormLabel htmlFor="password">Senha</FormLabel>
+            <Input
+              bg="white"
+              borderColor="black"
+              type="password"
+              name="password"
+              placeholder="*********"
+              value={ password }
+              data-testid="admin_manage__input-password"
+              onChange={ ({ target }) => setPassword(target.value) }
+            />
+          </Box>
+
+          <SelectAdmin setRole={ setRole } />
+
+          <Button
+            colorScheme="green"
+            mt="30px"
+            type="submit"
+            data-testid="admin_manage__button-register"
+            disabled={ isDisable }
+            onClick={ handleSubmit }
           >
-            <option value="seller">Vendedor</option>
-            <option value="customer">Cliente</option>
-          </select>
-        </label>
+            CADASTRAR
+          </Button>
 
-        <button
-          type="submit"
-          data-testid="admin_manage__button-register"
-          disabled={ isDisable }
-          onClick={ handleSubmit }
-        >
-          Cadastrar
-        </button>
+        </Flex>
 
-      </form>
+        <Box pt="3" w="50%">
+          {error
+          && (
+            <Alert status="error">
+              <Img src={ warning } alt="warning de erro" boxSize="20px" mr="5px" />
+              <AlertTitle
+                data-testid={ DATA_TESTID_ERROR }
+              >
+                Usuário já cadastrado!
+              </AlertTitle>
+            </Alert>
+          )}
 
-      {error && <span data-testid={ DATA_TESTID_ERROR }>User already exists</span>}
-      {userCreated && <span>User created successfully</span> }
-    </div>
+          {userCreated
+          && (
+            <Alert status="success">
+              <Img src={ success } alt="warning de erro" boxSize="15px" mr="5px" />
+              <AlertTitle>
+                Usuário cadastrado com sucesso!
+              </AlertTitle>
+            </Alert>
+          )}
+        </Box>
+
+      </FormControl>
+    </Box>
   );
 }
 

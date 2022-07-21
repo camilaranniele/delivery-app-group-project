@@ -1,4 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import {
+  Box,
+  Heading,
+  Table,
+  Thead,
+  Tr,
+  Th,
+  Tbody,
+  Td,
+  Button,
+} from '@chakra-ui/react';
 import { requestUsers, deleteUser } from '../../services/request';
 
 function UsersTable() {
@@ -16,57 +27,80 @@ function UsersTable() {
   }
 
   return (
-    <div>
-      <h1>Lista de usúarios</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Tipo</th>
-            <th>Excluir</th>
-          </tr>
-        </thead>
-        <tbody>
+    <Box w="80%" p="6">
+
+      <Heading as="h3" size="md" color="gray.500" mb="10px">Lista de usúarios</Heading>
+
+      <Table size="sd" boxShadow="base">
+        <Thead>
+          <Tr>
+            <Th textAlign="center">Item</Th>
+            <Th textAlign="center">Nome</Th>
+            <Th textAlign="center">E-mail</Th>
+            <Th textAlign="center">Tipo</Th>
+            <Th textAlign="center">Excluir</Th>
+          </Tr>
+        </Thead>
+
+        <Tbody>
           {
             users.map(({ id, name, email, role }) => (
-              <tr key={ id }>
-                <td
+              <Tr key={ id } fontSize="18px">
+
+                <Td
+                  textAlign="center"
+                  bg="green.300"
                   data-testid={ `admin_manage__element-user-table-item-number-${id}` }
                 >
                   {id}
-                </td>
-                <td
+                </Td>
+
+                <Td
+                  textAlign="center"
+                  bg="gray.200"
                   data-testid={ `admin_manage__element-user-table-name-${id}` }
                 >
                   {name}
-                </td>
-                <td
+                </Td>
+
+                <Td
+                  textAlign="center"
+                  bg="green.500"
+                  color="white"
                   data-testid={ `admin_manage__element-user-table-email-${id}` }
                 >
                   {email}
-                </td>
-                <td
+                </Td>
+
+                <Td
+                  textAlign="center"
+                  bg="purple.500"
+                  color="white"
                   data-testid={ `admin_manage__element-user-table-role-${id}` }
                 >
                   {role}
-                </td>
-                <td>
-                  <button
+                </Td>
+
+                <Td bg="blue.500">
+                  <Button
+                    w="full"
+                    bg="blue.500"
+                    color="white"
+                    _hover="none"
                     data-testid={ `admin_manage__element-user-table-remove-${id}` }
                     type="submit"
                     onClick={ () => deleteUserButton(id) }
                   >
-                    Excluir
-                  </button>
-                </td>
-              </tr>
+                    X
+                  </Button>
+                </Td>
+              </Tr>
             ))
           }
-        </tbody>
-      </table>
-    </div>
+        </Tbody>
+      </Table>
+
+    </Box>
   );
 }
 
