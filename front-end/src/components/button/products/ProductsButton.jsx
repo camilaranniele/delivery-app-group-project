@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Button, Flex, Input } from '@chakra-ui/react';
 import context from '../../../context';
-import './productsButton.css';
 
 function ProductsButton({ id, price, name }) {
   const MAGIC_NUMBER = -1;
@@ -34,7 +34,17 @@ function ProductsButton({ id, price, name }) {
       productsForStorage[objId].quantity = quantity;
       setproductsForStorage(productsForStorage);
     }
-  }, [quantity]);
+  },
+  [
+    MAGIC_NUMBER,
+    id,
+    name,
+    price,
+    productsForStorage,
+    quantity,
+    setproductsForStorage,
+    totalPrice,
+  ]);
 
   const handleAddQuantity = () => {
     setQuantity(((prevQuantity) => prevQuantity + 1));
@@ -75,30 +85,36 @@ function ProductsButton({ id, price, name }) {
   };
 
   return (
-    <div className="button-box">
-      <button
+    <Flex w="60%" alignItems="center">
+      <Button
+        colorScheme="green"
         type="button"
         value={ totalPrice }
         onClick={ handleSubQuantity }
         data-testid={ `customer_products__button-card-rm-item-${id}` }
       >
         -
-      </button>
-      <input
+      </Button>
+      <Input
+        textAlign="center"
+        border="1px"
+        borderColor="green"
+        bg="white"
         type="number"
         min="0"
         data-testid={ `customer_products__input-card-quantity-${id}` }
         onChange={ handleChangeQuantity }
         value={ quantity }
       />
-      <button
+      <Button
+        colorScheme="green"
         data-testid={ `customer_products__button-card-add-item-${id}` }
         type="button"
         onClick={ handleAddQuantity }
       >
         +
-      </button>
-    </div>
+      </Button>
+    </Flex>
   );
 }
 
