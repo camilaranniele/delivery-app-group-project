@@ -42,25 +42,31 @@ function OrderCard() {
       },
     ) => (
       <Box
+        boxShadow="4px 4px 12px 0px rgba(0,0,0,0.65)"
         key={ numeroDoPedido }
-        maxWidth="20em"
-        margin="2em"
-        border="0.2em solid"
-        borderRadius="10px"
-        borderColor="black.400"
+        w="80%"
+        m="6"
+        fontWeight="bold"
+        _hover={ { transform: 'scale(1.1)' } }
+        transition="0.25s"
       >
         <Link
           as={ ReactLink }
           to={ `/${role}/orders/${numeroDoPedido}` }
-
+          h="100%"
+          w="100%"
+          _hover={ { textDecorationLine: 'none' } }
         >
-          <Flex>
+          <Flex
+            bg="gray.100"
+            width="100%"
+          >
             <RequestOrderBox
               role={ role }
               conteudo={ { numeroDoPedido } }
               testId={ { testOrderId } }
             />
-            <Flex className="infoPedidos">
+            <Flex w="100%">
               <StatusOrderbox
                 role={ role }
                 conteudo={ {
