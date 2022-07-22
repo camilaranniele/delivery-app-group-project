@@ -35,16 +35,8 @@ function ProductsButton({ id, price, name }) {
       setproductsForStorage(productsForStorage);
     }
   },
-  [
-    MAGIC_NUMBER,
-    id,
-    name,
-    price,
-    productsForStorage,
-    quantity,
-    setproductsForStorage,
-    totalPrice,
-  ]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  [quantity]);
 
   const handleAddQuantity = () => {
     setQuantity(((prevQuantity) => prevQuantity + 1));
@@ -68,20 +60,21 @@ function ProductsButton({ id, price, name }) {
 
   const handleChangeQuantity = (e) => {
     const { value } = e.target;
+    const valueQuantity = Number(value);
 
-    if (value < 0) {
+    if (valueQuantity < 0) {
       setQuantity(0);
       return;
     }
 
-    const nextPrice = (totalPrice - (price * quantity)) + price * value;
+    const nextPrice = (totalPrice - (price * quantity)) + price * valueQuantity;
 
-    if (value > quantity) {
+    if (valueQuantity > quantity) {
       setTotalPrice(nextPrice);
     } else {
       setTotalPrice(nextPrice);
     }
-    setQuantity(value);
+    setQuantity(valueQuantity);
   };
 
   return (
