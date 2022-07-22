@@ -20,6 +20,9 @@ const theme = extendTheme({
       300: '#E5E5E5',
       500: '#343434',
     },
+    yellow: {
+      110: '#fadd02',
+    },
   },
   fonts: {
     body: 'Roboto, sans-serif',
