@@ -12,7 +12,7 @@ import {
   Img,
 } from '@chakra-ui/react';
 import { requestAdminRegister } from '../../services/request';
-import SelectAdmin from '../input/SelectInput';
+import SelectAdmin from '../select/SelectInput';
 import warning from '../../images/warning.png';
 import success from '../../images/accept.png';
 
