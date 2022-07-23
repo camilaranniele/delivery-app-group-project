@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Button, Flex, Input } from '@chakra-ui/react';
 import context from '../../../context';
-import './productsButton.css';
 
 function ProductsButton({ id, price, name }) {
   const MAGIC_NUMBER = -1;
@@ -34,7 +34,9 @@ function ProductsButton({ id, price, name }) {
       productsForStorage[objId].quantity = quantity;
       setproductsForStorage(productsForStorage);
     }
-  }, [quantity]);
+  },
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  [quantity]);
 
   const handleAddQuantity = () => {
     setQuantity(((prevQuantity) => prevQuantity + 1));
@@ -58,47 +60,54 @@ function ProductsButton({ id, price, name }) {
 
   const handleChangeQuantity = (e) => {
     const { value } = e.target;
+    const valueQuantity = Number(value);
 
-    if (value < 0) {
+    if (valueQuantity < 0) {
       setQuantity(0);
       return;
     }
 
-    const nextPrice = (totalPrice - (price * quantity)) + price * value;
+    const nextPrice = (totalPrice - (price * quantity)) + price * valueQuantity;
 
-    if (value > quantity) {
+    if (valueQuantity > quantity) {
       setTotalPrice(nextPrice);
     } else {
       setTotalPrice(nextPrice);
     }
-    setQuantity(value);
+    setQuantity(valueQuantity);
   };
 
   return (
-    <div className="button-box">
-      <button
+    <Flex w="60%" alignItems="center">
+      <Button
+        colorScheme="green"
         type="button"
         value={ totalPrice }
         onClick={ handleSubQuantity }
         data-testid={ `customer_products__button-card-rm-item-${id}` }
       >
         -
-      </button>
-      <input
+      </Button>
+      <Input
+        textAlign="center"
+        border="1px"
+        borderColor="green"
+        bg="white"
         type="number"
         min="0"
         data-testid={ `customer_products__input-card-quantity-${id}` }
         onChange={ handleChangeQuantity }
         value={ quantity }
       />
-      <button
+      <Button
+        colorScheme="green"
         data-testid={ `customer_products__button-card-add-item-${id}` }
         type="button"
         onClick={ handleAddQuantity }
       >
         +
-      </button>
-    </div>
+      </Button>
+    </Flex>
   );
 }
 
