@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { requestCreateSale } from '../../../services/request';
-import context from '../../../context';
-import CheckoutSelect from '../../select/CheckoutSelect';
-import CheckoutInput from '../../input/CheckoutInput';
+import { Box, FormControl, Heading, Button, Flex, Center } from '@chakra-ui/react';
+import { requestCreateSale } from '../../services/request';
+import context from '../../context';
+import CheckoutSelect from '../select/CheckoutSelect';
+import CheckoutInput from '../input/CheckoutInput';
 
 function TableSeller() {
   const { sellers } = useContext(context);
@@ -58,39 +59,55 @@ function TableSeller() {
   }, [deliveryNumber, deliveryAddress]);
 
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>P.Vendedora Responsavel</th>
-            <th>Endereço</th>
-            <th>numero</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <CheckoutSelect
-              sellers={ sellers }
-              setBuySellerId={ setSellerId }
-            />
-            <CheckoutInput
-              setUserAddress={ setDeliveryAddress }
-              setNumberAddress={ setDeliveryNumber }
-              userAddress={ deliveryAddress }
-              userNumberAddress={ deliveryNumber }
-            />
-          </tr>
-        </tbody>
-      </table>
-      <button
-        data-testid="customer_checkout__button-submit-order"
-        type="button"
-        onClick={ handleFinishedButton }
-        disabled={ isDisabled }
+    <Box w="80%" p="6">
+
+      <Heading
+        as="h3"
+        size="md"
+        color="gray.500"
+        mb="10px"
       >
-        Finalizar Pedido
-      </button>
-    </div>
+        Detalhes e Endereço da Entrega
+
+      </Heading>
+
+      <FormControl
+        p="4"
+        bg="gray.100"
+        boxShadow="base"
+      >
+        <Flex alignItems="center" justifyContent="space-around">
+
+          <CheckoutSelect
+            sellers={ sellers }
+            setBuySellerId={ setSellerId }
+          />
+
+          <CheckoutInput
+            setUserAddress={ setDeliveryAddress }
+            setNumberAddress={ setDeliveryNumber }
+            userAddress={ deliveryAddress }
+            userNumberAddress={ deliveryNumber }
+          />
+
+        </Flex>
+        <Center p="4">
+          <Button
+            size="lg"
+            w="400px"
+            colorScheme="green"
+            data-testid="customer_checkout__button-submit-order"
+            type="button"
+            onClick={ handleFinishedButton }
+            disabled={ isDisabled }
+          >
+            Finalizar Pedido
+          </Button>
+        </Center>
+
+      </FormControl>
+
+    </Box>
   );
 }
 
