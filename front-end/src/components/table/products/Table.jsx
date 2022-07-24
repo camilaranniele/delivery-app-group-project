@@ -1,9 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {
+  Box,
+  Heading,
+  Table,
+  Tbody,
+  Th,
+  Thead,
+  Tr,
+  Td,
+  Text,
+  Flex,
+} from '@chakra-ui/react';
 import ButtonCheckout from '../../button/checkout/ButtonCheckout';
 
-function Table({
+function TableOrders({
   productsInStore,
   removeItenInListProducts,
   idIndex,
@@ -22,60 +34,81 @@ function Table({
   }, [localtion.pathname]);
 
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Descrição</th>
-            <th>quantidade</th>
-            <th>Valor unitário</th>
-            <th>Sub-total</th>
-            { isRender && <th> Remover Item</th> }
-          </tr>
-        </thead>
-        <tbody>
+    <Box w="80%" p="6">
+
+      <Heading as="h3" size="md" color="gray.500" mb="10px">Finalizar pedido</Heading>
+
+      <Table size="sd" boxShadow="base">
+        <Thead>
+          <Tr>
+            <Th textAlign="center">Item</Th>
+            <Th textAlign="center">Descrição</Th>
+            <Th textAlign="center">quantidade</Th>
+            <Th textAlign="center">Valor unitário</Th>
+            <Th textAlign="center">Sub-total</Th>
+            { isRender && <Th textAlign="center"> Remover Item</Th> }
+          </Tr>
+        </Thead>
+        <Tbody fontWeight="bold">
           {
             productsInStore.map(({ id, name, price, salesProducts, quantity }, index) => {
               const totalPrice = (Number(price) * quantity)
               || Number(price) * salesProducts.quantity;
               return (
-                <tr key={ id }>
-                  <td
+                <Tr key={ id }>
+                  <Td
+                    textAlign="center"
+                    bg="green.300"
                     data-testid={
                       `${idIndex}${index}`
                     }
                   >
                     { index + 1 }
-                  </td>
-                  <td
+                  </Td>
+
+                  <Td
+                    textAlign="center"
+                    bg="gray.200"
                     data-testid={
                       `${idName}${index}`
                     }
                   >
                     { name }
-                  </td>
-                  <td
+                  </Td>
+
+                  <Td
+                    textAlign="center"
+                    bg="green.500"
+                    color="white"
                     data-testid={
                       `${idQuantity}${index}`
                     }
                   >
                     { quantity || salesProducts.quantity }
-                  </td>
-                  <td
+                  </Td>
+
+                  <Td
+                    textAlign="center"
+                    bg="purple.500"
+                    color="white"
                     data-testid={
                       `${idPrice}${index}`
                     }
                   >
                     { Number(price).toFixed(2).toString().replace('.', ',') }
-                  </td>
-                  <td
+                  </Td>
+
+                  <Td
+                    textAlign="center"
+                    bg="blue.500"
+                    color="white"
                     data-testid={
                       `${idSubTotal}${index}`
                     }
                   >
                     { Number(totalPrice).toFixed(2).toString().replace('.', ',') }
-                  </td>
+                  </Td>
+
                   {
                     isRender
                     && <ButtonCheckout
@@ -85,26 +118,41 @@ function Table({
                     />
                   }
 
-                </tr>
+                </Tr>
               );
             })
           }
-        </tbody>
-      </table>
-      <p data-testid={ idTotalPrice }>
-        {
-          fullPrice.toFixed(2).toString().replace('.', ',')
-        }
-      </p>
-    </div>
+        </Tbody>
+      </Table>
+      <Flex alignSelf="flex-end" justifyContent="flex-end" pt="2">
+        <Text
+          p="2"
+          borderRadius="8px"
+          textAlign="center"
+          minW="220px"
+          w="15%"
+          bg="green.500"
+          color="white"
+          fontSize="20px"
+          fontWeight="bold"
+          data-testid={ idTotalPrice }
+        >
+          Total: R$
+          {
+            fullPrice.toFixed(2).toString().replace('.', ',')
+          }
+        </Text>
+      </Flex>
+
+    </Box>
   );
 }
 
-Table.defaultProps = {
+TableOrders.defaultProps = {
   removeItenInListProducts: () => {},
 };
 
-Table.propTypes = {
+TableOrders.propTypes = {
   productsInStore: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -121,4 +169,4 @@ Table.propTypes = {
   fullPrice: PropTypes.number.isRequired,
 };
 
-export default Table;
+export default TableOrders;
