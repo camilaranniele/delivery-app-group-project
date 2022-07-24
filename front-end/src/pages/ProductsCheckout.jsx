@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-import TableSeller from '../components/table/checkout/TableSeller';
+import { Box, VStack } from '@chakra-ui/react';
+import TableSeller from '../components/form/FormSeller';
 import NavBar from '../components/navBar/NavBar';
-import Table from '../components/table/products/Table';
+import TableOrders from '../components/table/products/Table';
 
 function ProductsCheckout() {
   const [productsInStore, setProductsInStore] = useState([]);
@@ -57,12 +59,10 @@ function ProductsCheckout() {
   }, []);
 
   return (
-    <div>
-      <header>
-        <NavBar />
-      </header>
-      <main>
-        <Table
+    <Box>
+      <NavBar />
+      <VStack>
+        <TableOrders
           productsInStore={ productsInStore }
           removeItenInListProducts={ removeItenInListProducts }
           fullPrice={ Number(checkoutTotalPrice) }
@@ -73,11 +73,9 @@ function ProductsCheckout() {
           idSubTotal="customer_checkout__element-order-table-sub-total-"
           idTotalPrice="customer_checkout__element-order-total-price"
         />
-      </main>
-      <footer>
         <TableSeller />
-      </footer>
-    </div>
+      </VStack>
+    </Box>
 
   );
 }
