@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormLabel, Input, Box } from '@chakra-ui/react';
 
 function CheckoutInput({
   setUserAddress,
@@ -14,26 +15,35 @@ function CheckoutInput({
   const handleNumberAddres = ({ value }) => {
     setNumberAddress(value);
   };
+
   return (
     <>
-      <td>
-        <input
+      <Box>
+        <FormLabel htmlFor="adrress">Endereço</FormLabel>
+        <Input
+          w="500px"
+          bg="white"
+          borderColor="black"
           data-testid="customer_checkout__input-address"
           type="text"
           placeholder="Seu endereço"
           value={ userAddress }
           onChange={ (e) => handleUserAddres(e.target) }
         />
-      </td>
-      <td>
-        <input
+      </Box>
+
+      <Box>
+        <FormLabel htmlFor="number">Número</FormLabel>
+        <Input
+          bg="white"
+          borderColor="black"
           data-testid="customer_checkout__input-addressNumber"
           type="number"
-          placeholder="Seu numero"
+          placeholder="Seu número"
           value={ userNumberAddress }
           onChange={ (e) => handleNumberAddres(e.target) }
         />
-      </td>
+      </Box>
     </>
   );
 }

@@ -1,13 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Box, FormLabel, Select } from '@chakra-ui/react';
 
 function CheckoutSelect({ sellers, setBuySellerId }) {
   const handlerSellerId = ({ value }) => {
     setBuySellerId(value);
   };
   return (
-    <td>
-      <select data-testid="customer_checkout__select-seller">
+    <Box>
+      <FormLabel htmlFor="seller">P. Vendedora Responsável</FormLabel>
+      <Select
+        w="300px"
+        borderColor="black"
+        bg="white"
+        data-testid="customer_checkout__select-seller"
+      >
         { sellers.map(({ id, name }) => (
           <option
             key={ id }
@@ -17,8 +24,8 @@ function CheckoutSelect({ sellers, setBuySellerId }) {
             { name }
           </option>
         ))}
-      </select>
-    </td>
+      </Select>
+    </Box>
   );
 }
 

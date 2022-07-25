@@ -90,6 +90,7 @@ function ProductsButton({ id, price, name }) {
       </Button>
       <Input
         textAlign="center"
+        minWidth="50%"
         border="1px"
         borderColor="green"
         bg="white"

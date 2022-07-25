@@ -37,10 +37,18 @@ function OrderDetailContainer() {
   };
 
   return (
-    <Flex>
+    <Flex
+      bg="gray.200"
+      p="1"
+      alignItems="center"
+      justifyContent="space-between"
+    >
       <Text
+        fontWeight="bold"
         data-testid={ `${role}_order_details__element-order-details-label-order-id` }
       >
+        PEDIDO
+        {' '}
         {numeroDoPedido}
       </Text>
       {
@@ -51,28 +59,40 @@ function OrderDetailContainer() {
               `${role}_order_details__element-order-details-label-seller-name`
             }
           >
+            P. VEND:
             {vendedor?.name}
           </Text>
         )
       }
+
       <Text
+        fontWeight="bold"
         data-testid={ `${role}_order_details__element-order-details-label-order-date` }
       >
         {new Date(dataDaVenda).toLocaleDateString('pt-BR')}
       </Text>
+
       <Text
+        fontWeight="bold"
+        textAlign="center"
+        borderRadius="4"
+        bg="gray.300"
+        p="2"
+        w="200px"
         data-testid={
           `${role}_order_details__element-order-details-label-delivery-status`
         }
       >
         {statusDaVenda}
       </Text>
+
       {
         handleUser
         && (
           <OrderStatusButton statusDaVenda={ statusDaVenda } />
         )
       }
+
     </Flex>
   );
 }
