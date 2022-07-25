@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-import { Box, VStack } from '@chakra-ui/react';
+import { Box, VStack, Heading } from '@chakra-ui/react';
 import TableSeller from '../components/form/FormSeller';
 import NavBar from '../components/navBar/NavBar';
 import TableOrders from '../components/table/products/Table';
@@ -62,6 +62,12 @@ function ProductsCheckout() {
     <Box>
       <NavBar />
       <VStack>
+        <Box w="80%" p="30px 0 0 25px">
+          <Heading as="h3" size="md" color="gray.500" mb="10px">
+            Finalizar Pedido
+          </Heading>
+        </Box>
+
         <TableOrders
           productsInStore={ productsInStore }
           removeItenInListProducts={ removeItenInListProducts }
@@ -74,6 +80,7 @@ function ProductsCheckout() {
           idTotalPrice="customer_checkout__element-order-total-price"
         />
         <TableSeller />
+
       </VStack>
     </Box>
 
