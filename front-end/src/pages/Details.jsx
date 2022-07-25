@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Flex } from '@chakra-ui/react';
+import { Box, VStack, Heading } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import NavBar from '../components/navBar/NavBar';
 import DetailTable from '../components/table/productDetail/TableDetails';
@@ -25,20 +25,30 @@ function Details() {
   }, [id, token]);
 
   return (
-    <div>
-      <header>
-        <NavBar />
-      </header>
-      <Flex
+    <Box>
+
+      <NavBar />
+
+      <VStack
         as="main"
         flexDir="column"
       >
-        <OrderDetailContainer />
+        <Box w="80%" p="6">
+
+          <Heading as="h3" size="md" color="gray.500" m="20px 0">
+            Detalhes do Pedido
+          </Heading>
+
+          <OrderDetailContainer />
+
+        </Box>
+
         <DetailTable
           carrinho={ order }
         />
-      </Flex>
-    </div>
+
+      </VStack>
+    </Box>
   );
 }
 
