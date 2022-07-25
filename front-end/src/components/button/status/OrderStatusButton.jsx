@@ -24,6 +24,7 @@ function OrderStatusButton({ statusDaVenda }) {
         role === 'customer'
           ? (
             <Button
+              colorScheme="green"
               name="delivery"
               data-testid="customer_order_details__button-delivery-check"
               onClick={ () => handleClick(entregue) }
