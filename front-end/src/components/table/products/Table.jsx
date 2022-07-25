@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Box,
-  Heading,
+  // Heading,
   Table,
   Tbody,
   Th,
@@ -36,9 +36,7 @@ function TableOrders({
   return (
     <Box w="80%" p="6">
 
-      <Heading as="h3" size="md" color="gray.500" mb="10px">Finalizar pedido</Heading>
-
-      <Table size="sd" boxShadow="base">
+      <Table size="md" boxShadow="base">
         <Thead>
           <Tr>
             <Th textAlign="center">Item</Th>
