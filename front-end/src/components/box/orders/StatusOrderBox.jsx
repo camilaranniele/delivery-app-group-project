@@ -1,7 +1,6 @@
 import React from 'react';
 import { Flex, Box, Text } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
-import OrderText from '../../text/orders/OrdersText';
 import OrdersFooterText from '../../text/orders/OrdersFooterText';
 
 function StatusOrderbox({ role, conteudo, testId, haveFooter }) {
@@ -10,7 +9,7 @@ function StatusOrderbox({ role, conteudo, testId, haveFooter }) {
       return 'red.500';
     }
     if (conteudo.statusDeVenda === 'Preparando') {
-      return 'orange.500';
+      return 'yellow.110';
     }
     if (conteudo.statusDeVenda === 'Em Trânsito') {
       return 'green.500';
@@ -23,42 +22,49 @@ function StatusOrderbox({ role, conteudo, testId, haveFooter }) {
   return (
     <Box
       bg="blackAlpha.100"
-      align="center"
+      alignItems="center"
+      w="100%"
     >
       <Flex
-        align="center"
+        minH="60%"
+        minW="100%"
+        alignItems="center"
+        p="1"
       >
-        <Box
+        <Text
           bg={ handleBackGround }
           borderRadius="1em"
-          padding="1em"
+          minH="100%"
           textColor="white"
+          padding="23px 0 23px 0"
+          w="100%"
+          textAlign="center"
+          ml="6"
+          fontFamily="font.body"
+          data-testid={ `${role}${testId.testOrderStatus}${conteudo.numeroDoPedido}` }
         >
-          <OrderText
-            role={ role }
-            conteudo={ conteudo.statusDeVenda }
-            testId={ testId.testOrderStatus }
-            orderId={ conteudo.numeroDoPedido }
-          />
-        </Box>
-        <Box>
-          <OrderText
-            role={ role }
-            conteudo={ new Date(conteudo.dataDaVenda).toLocaleDateString('pt-BR') }
-            testId={ testId.testOrderDate }
-            orderId={ conteudo.numeroDoPedido }
-          />
-          <Flex>
-            <Text>
-              Valor:
-            </Text>
-            <OrderText
-              role={ role }
-              conteudo={ conteudo.precoTotal.toString().replace('.', ',') }
-              testId={ testId.testOrderTotalPrice }
-              orderId={ conteudo.numeroDoPedido }
-            />
-          </Flex>
+          { conteudo.statusDeVenda }
+        </Text>
+        <Box
+          alignContent="center"
+          w="100%"
+          fontWeight="bold"
+        >
+          <Text
+            align="center"
+            data-testid={ `${role}${testId.testOrderDate}${conteudo.numeroDoPedido}` }
+          >
+            { new Date(conteudo.dataDaVenda).toLocaleDateString('pt-BR') }
+          </Text>
+
+          <Text
+            align="center"
+            data-testid={
+              `${role}${testId.testOrderTotalPrice}${conteudo.numeroDoPedido}`
+            }
+          >
+            { `Valor: ${conteudo.precoTotal.toString().replace('.', ',')}` }
+          </Text>
         </Box>
       </Flex>
       {

@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 function OrdersFooterText({ role, conteudo, testId, orderId }) {
   return (
     <Text
+      fontWeight="medium"
+      align="end"
+      pr="2"
       data-testid={ `${role}${testId}${orderId}` }
     >
       { `${conteudo.enderecoDeEntrega},${conteudo.numeroDoEndereco}` }
