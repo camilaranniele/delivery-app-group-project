@@ -7,6 +7,8 @@ function ButtonCheckout({ removeItenInListProducts, id, index }) {
     <td>
       <Button
         w="full"
+        p="7"
+        borderRadius="none"
         bg="green.300"
         color="white"
         _hover="none"
