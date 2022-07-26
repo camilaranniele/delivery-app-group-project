@@ -36,7 +36,7 @@ function OrderStatusButton({ statusDaVenda }) {
             <>
               <Button
                 mr="20px"
-                bg="green.300"
+                bg="blue.500"
                 color="white"
                 name="preparing"
                 data-testid="seller_order_details__button-preparing-check"
@@ -46,6 +46,7 @@ function OrderStatusButton({ statusDaVenda }) {
                 Preparar pedido
               </Button>
               <Button
+                colorScheme="green"
                 name="dispatch"
                 data-testid="seller_order_details__button-dispatch-check"
                 onClick={ () => handleClick(emTransito) }
