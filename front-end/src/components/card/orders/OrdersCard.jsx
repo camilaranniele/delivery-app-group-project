@@ -43,18 +43,18 @@ function OrderCard() {
     ) => (
       <Box
         boxShadow="4px 4px 12px 0px rgba(0,0,0,0.65)"
-        key={ numeroDoPedido }
         w="80%"
         m="6"
         fontWeight="bold"
         _hover={ { transform: 'scale(1.1)' } }
         transition="0.25s"
+        key={ numeroDoPedido }
       >
         <Link
-          as={ ReactLink }
-          to={ `/${role}/orders/${numeroDoPedido}` }
           h="100%"
           w="100%"
+          as={ ReactLink }
+          to={ `/${role}/orders/${numeroDoPedido}` }
           _hover={ { textDecorationLine: 'none' } }
         >
           <Flex
