@@ -23,17 +23,30 @@ function OrderDetailContainer() {
   const {
     id: numeroDoPedido,
     seller: vendedor,
-    saleDate: dataDaVenda,
-    status: statusDaVenda,
+    saleDate: dataDeVenda,
+    status: statusDeVenda,
   } = orders;
-
-  console.log(orders);
 
   const handleUser = () => {
     if (role === 'seller') {
       return true;
     }
     return false;
+  };
+
+  const handleColor = () => {
+    if (statusDeVenda === 'Pendente') {
+      return 'red.500';
+    }
+    if (statusDeVenda === 'Preparando') {
+      return 'yellow.110';
+    }
+    if (statusDeVenda === 'Em Trânsito') {
+      return 'green.500';
+    }
+    if (statusDeVenda === 'Entregue') {
+      return 'blue.500';
+    }
   };
 
   return (
@@ -69,27 +82,28 @@ function OrderDetailContainer() {
         fontWeight="bold"
         data-testid={ `${role}_order_details__element-order-details-label-order-date` }
       >
-        {new Date(dataDaVenda).toLocaleDateString('pt-BR')}
+        {new Date(dataDeVenda).toLocaleDateString('pt-BR')}
       </Text>
 
       <Text
         fontWeight="bold"
         textAlign="center"
         borderRadius="4"
-        bg="gray.300"
+        color={ handleColor }
+        border="3px solid"
         p="2"
-        w="200px"
+        w="150px"
         data-testid={
           `${role}_order_details__element-order-details-label-delivery-status`
         }
       >
-        {statusDaVenda}
+        {statusDeVenda}
       </Text>
 
       {
         handleUser
         && (
-          <OrderStatusButton statusDaVenda={ statusDaVenda } />
+          <OrderStatusButton statusDaVenda={ statusDeVenda } />
         )
       }
 

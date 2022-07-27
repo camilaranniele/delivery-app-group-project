@@ -11,7 +11,6 @@ import {
 } from '@chakra-ui/react';
 import context from '../../../context';
 import ProductsButton from '../../button/products/ProductsButton';
-import './card.css';
 
 function ProductCard() {
   const {

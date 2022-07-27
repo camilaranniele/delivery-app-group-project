@@ -1,6 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Box, FormControl, Heading, Button, Flex, Center } from '@chakra-ui/react';
+import {
+  Box,
+  FormControl,
+  Heading,
+  Button,
+  Flex,
+  Center,
+  useToast,
+} from '@chakra-ui/react';
 import { requestCreateSale } from '../../services/request';
 import context from '../../context';
 import CheckoutSelect from '../select/CheckoutSelect';
@@ -24,6 +32,13 @@ function TableSeller() {
     const { id } = await requestCreateSale('/sales', body, token);
     history.push(`/customer/orders/${id}`);
   };
+
+  const toast = useToast({
+    title: 'Compra realizada com sucesso',
+    status: 'success',
+    duration: 5000,
+    isClosable: true,
+  });
 
   const handleFinishedButton = () => {
     const totalPrice = Storage.get('totalPrice');
@@ -49,6 +64,7 @@ function TableSeller() {
     Storage.set('buySellerInfos', user);
     setDeliveryNumber('');
     setDeliveryAddress('');
+    toast();
     requestForInsertSaleInDB(user, parsedUserInfos.token);
   };
 
