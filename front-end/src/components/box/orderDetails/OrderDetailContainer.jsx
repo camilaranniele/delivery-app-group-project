@@ -89,8 +89,8 @@ function OrderDetailContainer() {
         fontWeight="bold"
         textAlign="center"
         borderRadius="4"
-        bg={ handleColor }
-        color="white"
+        color={ handleColor }
+        border="3px solid"
         p="2"
         w="150px"
         data-testid={
